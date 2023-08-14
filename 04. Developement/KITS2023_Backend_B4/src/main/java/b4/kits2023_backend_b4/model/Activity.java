@@ -1,0 +1,28 @@
+package b4.kits2023_backend_b4.model;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "activities")
+public class Activity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(nullable = false, unique = true)
+    private String name;
+    private String description;
+    @Column(nullable = false)
+    private double emission;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(
+            name = "categoryId",
+            referencedColumnName = "id"
+    )
+    private Category category;
+}
