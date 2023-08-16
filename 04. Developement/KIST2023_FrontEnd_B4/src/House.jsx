@@ -88,7 +88,7 @@ function House(){
                     backgroundSize: 'cover', // Để hình ảnh nền hiển thị đầy đủ trong phần tử
                     backgroundPosition: 'center', // Căn giữa hình ảnh nền
                     width: '100%', // Đảm bảo phần tử chiếm hết chiều rộng
-                    height: '50%', // Đặt chiều cao của phần tử
+                    height: '70%', // Đặt chiều cao của phần tử
                     display: 'flex', // Sử dụng flexbox
                     flexDirection: 'column', // Xếp hình ảnh và nội dung ở dưới theo cột
                     alignItems: 'center', // Căn giữa theo chiều ngang
