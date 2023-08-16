@@ -20,6 +20,10 @@ public class User {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
-    private String avatar, role;
+
+    private String avatar;
+    @Column(columnDefinition = "VARCHAR(255) default 'user'")
+    private String role;
+    @Column(columnDefinition = "Boolean default true")
     private Boolean status;
 }
