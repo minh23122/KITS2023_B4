@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { Image, Col, InputNumber, Row, Slider, Space } from 'antd';
 import './App.css';
+import cloud1 from './assets/cloud/cloud1.png'
+import cloud2 from './assets/cloud/cloud2.png'
+import cloud3 from './assets/cloud/cloud3.png'
 function App() {
   const [beefInputValue, setBeefInputValue] = useState(1);
   const beef = (beefValue) => {
@@ -24,17 +27,17 @@ function App() {
   };
   return (
     <>
-      <div className='container'>
-        <img className='logo' src='logo.png' />
+      <div className='container1'>
+        <img className='logo1' src='logo.png' />
         <div>
-          <img className='cloud1' src='cloud1.png' />
-          <img className='cloud2' src='cloud3.png' />
-          <img className='cloud3' src='cloud2.png' />
+          <img className='cld1' src={cloud1} />
+          <img className='cld2' src={cloud3} />
+          <img className='cld3' src={cloud2} />
         </div>
-        <div className='content'>
-          <p className='caption'>FOOT</p>
-          <h1 className='title'>How often do you eat animal-based products?</h1>
-          <h2 className='sub_title'> (beef, pork, chicken, fish, eggs, dairy products)</h2>
+        <div className='content1'>
+          <p className='caption1'>FOOT</p>
+          <h1 className='title1'>How often do you eat animal-based products?</h1>
+          <h2 className='sub_title1'> (beef, pork, chicken, fish, eggs, dairy products)</h2>
           <Row>
             <Col span={4}>
               <h2>Beef</h2>
@@ -154,6 +157,7 @@ function App() {
                 max={20}
                 style={{
                   margin: '0 16px',
+                  textAlign:'center',
                 }}
                 value={eggsInputValue}
                 onChange={Eggs}
@@ -161,7 +165,7 @@ function App() {
             </Col>
           </Row>
         </div>
-        <img className='houseImg' src="FoodCategoryDesktop.png" alt="" />
+        <img className='FoodImage' src="FoodCategoryDesktop.png" alt="" />
       </div>
     </>
   )
