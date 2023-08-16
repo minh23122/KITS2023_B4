@@ -42,7 +42,19 @@ function App() {
             </div>
           </div>
         )}
-        <img className='houseImg' src={Anhchinh} alt="" />
+        {/* <img className='houseImg' src={Anhchinh} alt="" /> */}
+        <div className='houseImg' style={{
+          backgroundImage: `url(${Anhchinh})`,
+          backgroundSize: 'cover', // Để hình ảnh nền hiển thị đầy đủ trong phần tử
+          backgroundPosition: 'center', // Căn giữa hình ảnh nền
+          width: '100%', // Đảm bảo phần tử chiếm hết chiều rộng
+          height: '75%', // Đặt chiều cao của phần tử
+          display: 'flex', // Sử dụng flexbox
+          flexDirection: 'column', // Xếp hình ảnh và nội dung ở dưới theo cột
+          alignItems: 'center', // Căn giữa theo chiều ngang
+          justifyContent: 'flex-end', // Đặt nội dung ở dưới
+        }}>
+        </div>
         {isPopupOpenRegister && (
           <div className="popup">
             <div className="popup-content">

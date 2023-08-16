@@ -1,6 +1,6 @@
 import './House.css';
 import { useState } from 'react'
-import { Image, Col, InputNumber, Row, Slider, Space } from 'antd';
+import { Col, Row, Slider } from 'antd';
 import House3 from './assets/housingMember/HousingMemberAreaHouseHugeDesktop.png'
 import House2 from './assets/housingMember/HousingMemberAreaHouseLargeDesktop.png'
 import House1 from './assets/housingMember/HousingMemberAreaHouseTinyDesktop.png'
@@ -17,6 +17,7 @@ import Man10 from './assets/man/Man10.png'
 import cloud1 from './assets/cloud/cloud1.png'
 import cloud2 from './assets/cloud/cloud2.png'
 import cloud3 from './assets/cloud/cloud3.png'
+import Heading from '../Heading/Heading';
 function House(){
     const [peopleInputValue, setPeopleInputValue] = useState(1);
     const people = (peopleValue) => {
@@ -38,7 +39,9 @@ function House(){
     return(
         <>
             <div className='container2'>
-                <img className='logo2' src='logo.png' />
+                <div>
+                    <Heading />
+                </div>  
                 <div>
                     <img className='cld1' src={cloud1} />
                     <img className='cld2' src={cloud3} />
@@ -63,7 +66,7 @@ function House(){
                                 <h2>10+</h2>
                             </Col>
                         </Row>
-                    <h1>{peopleInputValue}</h1>
+                    <h1 className='value_people'>{peopleInputValue}</h1>
                     <h1 className='title2'>What is the size of your home?</h1>
                     <Row>
                         <Col span={4}>
@@ -81,14 +84,14 @@ function House(){
                             <h2>HUGE</h2>
                         </Col>
                     </Row>
-                    <h1>{sizeInputValue} m2</h1>
+                    <h1 className='value_size'>{sizeInputValue} m2</h1>
                 </div>
                 <div className='houseMenberImg' style={{
                     backgroundImage: backgroundImage,
                     backgroundSize: 'cover', // Để hình ảnh nền hiển thị đầy đủ trong phần tử
                     backgroundPosition: 'center', // Căn giữa hình ảnh nền
                     width: '100%', // Đảm bảo phần tử chiếm hết chiều rộng
-                    height: '70%', // Đặt chiều cao của phần tử
+                    height: '60%', // Đặt chiều cao của phần tử
                     display: 'flex', // Sử dụng flexbox
                     flexDirection: 'column', // Xếp hình ảnh và nội dung ở dưới theo cột
                     alignItems: 'center', // Căn giữa theo chiều ngang

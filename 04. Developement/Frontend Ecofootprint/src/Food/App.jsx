@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { Image, Col, InputNumber, Row, Slider, Space} from 'antd'; 
 // import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import Logo from './assets/logo.png'
 import Cloud1 from './assets/cloud1.png'
 import Cloud2 from './assets/cloud2.png'
 import FoodImg from './assets/FoodCategoryDesktop.png'
 // import Test1 from '../Test1/App'
 // import Test2 from '../Test2/App'
+import Heading from '../Heading/Heading';
 function App() {
   const [beefInputValue, setBeefInputValue] = useState(1);
   const beef = (beefValue) => {
@@ -31,8 +31,10 @@ function App() {
   };
   return (
     <>
-      <div className='container'>
-        <img className='logo' src={Logo} />
+      <div className='container5'>
+      <div>
+        <Heading />
+      </div>        
         <div>
           <img className='cloud1' src={Cloud1} />
           <img className='cloud2' src={Cloud2} />
@@ -45,7 +47,7 @@ function App() {
             <Col span={4}>
               <h2>Beef</h2>
             </Col>
-            <Col span={12}>
+            <Col span={16}>
               <Slider
                 min={0}
                 max={20}
@@ -70,7 +72,7 @@ function App() {
             <Col span={4}>
               <h2>Pork</h2>
             </Col>
-            <Col span={12}>
+            <Col span={16}>
               <Slider
                 min={0}
                 max={20}
@@ -95,7 +97,7 @@ function App() {
             <Col span={4}>
               <h2>Poultry</h2>
             </Col>
-            <Col span={12}>
+            <Col span={16}>
               <Slider
                 min={0}
                 max={20}
@@ -120,7 +122,7 @@ function App() {
             <Col span={4}>
               <h2>Fish</h2>
             </Col>
-            <Col span={12}>
+            <Col span={16}>
               <Slider
                 min={0}
                 max={20}
@@ -145,7 +147,7 @@ function App() {
             <Col span={4} style={{ paddingRight: '20px' }}>
               <h2>Eggs,Dairy</h2>
             </Col>
-            <Col span={12}>
+            <Col span={16}>
               <Slider
                 min={0}
                 max={20}
@@ -167,7 +169,18 @@ function App() {
             </Col>
           </Row>
         </div>
-        <img className='houseImg' src={FoodImg} alt="" />
+        <div className='houseImg' style={{
+                    backgroundImage: `url(${FoodImg})`,
+                    backgroundSize: 'cover', // Để hình ảnh nền hiển thị đầy đủ trong phần tử
+                    backgroundPosition: 'center', // Căn giữa hình ảnh nền
+                    width: '100%', // Đảm bảo phần tử chiếm hết chiều rộng
+                    height: '100%', // Đặt chiều cao của phần tử
+                    display: 'flex', // Sử dụng flexbox
+                    flexDirection: 'column', // Xếp hình ảnh và nội dung ở dưới theo cột
+                    alignItems: 'center', // Căn giữa theo chiều ngang
+                    justifyContent: 'flex-end', // Đặt nội dung ở dưới
+                }}>
+        </div>
       </div>
       {/* <Router>
       <nav style={{ margin: 10 }}>
