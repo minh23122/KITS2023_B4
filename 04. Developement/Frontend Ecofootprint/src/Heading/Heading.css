@@ -1,0 +1,15 @@
+.heading-container {
+    height: 100px;
+    background-color: #8dc1cb;
+    padding: 0 20px;
+  }
+  
+.user-icon {
+padding-top: 20px;
+width: 50px;
+float: right;
+cursor: pointer;
+}
+.logo{
+    cursor: pointer;
+}

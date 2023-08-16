@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { Image, Col, InputNumber, Row, Slider, Space} from 'antd'; 
 // import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
-import Logo from './assets/logo.png'
 import Cloud1 from './assets/cloud1.png'
 import Cloud2 from './assets/cloud2.png'
 import FoodImg from './assets/FoodCategoryDesktop.png'
 // import Test1 from '../Test1/App'
 // import Test2 from '../Test2/App'
+import Heading from '../Heading/Heading';
 function App() {
   const [beefInputValue, setBeefInputValue] = useState(1);
   const beef = (beefValue) => {
@@ -32,7 +32,9 @@ function App() {
   return (
     <>
       <div className='container'>
-        <img className='logo' src={Logo} />
+      <div>
+        <Heading />
+      </div>        
         <div>
           <img className='cloud1' src={Cloud1} />
           <img className='cloud2' src={Cloud2} />
