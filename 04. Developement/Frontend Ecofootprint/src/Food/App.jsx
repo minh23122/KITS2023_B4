@@ -1,6 +1,13 @@
 import { useState } from 'react'
-import { Image, Col, InputNumber, Row, Slider, Space } from 'antd';
+import { Image, Col, InputNumber, Row, Slider, Space} from 'antd'; 
+// import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import './App.css';
+import Logo from './assets/logo.png'
+import Cloud1 from './assets/cloud1.png'
+import Cloud2 from './assets/cloud2.png'
+import FoodImg from './assets/FoodCategoryDesktop.png'
+// import Test1 from '../Test1/App'
+// import Test2 from '../Test2/App'
 function App() {
   const [beefInputValue, setBeefInputValue] = useState(1);
   const beef = (beefValue) => {
@@ -25,11 +32,10 @@ function App() {
   return (
     <>
       <div className='container'>
-        <img className='logo' src='logo.png' />
+        <img className='logo' src={Logo} />
         <div>
-          <img className='cloud1' src='cloud1.png' />
-          <img className='cloud2' src='cloud3.png' />
-          <img className='cloud3' src='cloud2.png' />
+          <img className='cloud1' src={Cloud1} />
+          <img className='cloud2' src={Cloud2} />
         </div>
         <div className='content'>
           <p className='caption'>FOOT</p>
@@ -161,8 +167,22 @@ function App() {
             </Col>
           </Row>
         </div>
-        <img className='houseImg' src="FoodCategoryDesktop.png" alt="" />
+        <img className='houseImg' src={FoodImg} alt="" />
       </div>
+      {/* <Router>
+      <nav style={{ margin: 10 }}>
+          <Link to="/test1" style={{ padding: 5 }}>
+          Test1
+          </Link>
+          <Link to="/test2" style={{ padding: 5 }}>
+          Test2
+          </Link>
+      </nav>
+      <Routes>
+        <Route path="/test1" element={<Test1 />} />
+        <Route path="/test2" element={<Test2/>} />
+      </Routes>
+    </Router> */}
     </>
   )
 }
