@@ -33,13 +33,19 @@ public class User {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Set<Role> roles = new HashSet<>();
 
     @Column(columnDefinition = "boolean default true") // Thêm mặc định status là true
     private Boolean status;
-
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "regular_activity",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "activity_id", referencedColumnName = "id")
+    )
+    private Set<Activity> activities=new HashSet<>();
 
     public User(String name,String username, String email, String password) {
         this.name=name;

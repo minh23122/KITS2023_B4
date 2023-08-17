@@ -36,6 +36,7 @@ public class UserSerVice {
         return null;
     }
 
+
     public List<User> getAllUser(){
         return userRepository.findAll();
     }
@@ -122,5 +123,14 @@ public class UserSerVice {
         } else {
             return ResponseEntity.notFound().build();
         }
+
+    public User changeAvatar(int id, String avatar){
+        Optional<User> updatedUser=userRepository.findById(id);
+        if(updatedUser.isPresent()){
+            User user=updatedUser.get();
+            user.setAvatar(avatar);
+            return userRepository.save(user);
+        }
+        return null;
     }
 }
