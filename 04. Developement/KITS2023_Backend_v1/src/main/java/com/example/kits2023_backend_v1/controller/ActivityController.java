@@ -1,0 +1,45 @@
+package com.example.kits2023_backend_v1.controller;
+
+import com.example.kits2023_backend_v1.model.Activity;
+import com.example.kits2023_backend_v1.repository.ActivityRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/api/activity")
+public class ActivityController {
+    @Autowired
+    private ActivityRepository activityRepository;
+    @GetMapping("/all")
+    public List<Activity> getAll(){
+        return activityRepository.findAll();
+    }
+    @PostMapping
+    public Activity insertActivity(@RequestBody Activity activity){
+        if(activityRepository.existsById(activity.getId())) return null;
+        return activityRepository.save(activity);
+    }
+    @PutMapping("/update/{id}")
+    public Activity updateActivity(@PathVariable int id,@RequestBody Activity activity){
+        Optional<Activity> u=activityRepository.findById(id);
+        if(u.isPresent()){
+            Activity updateActivity=u.get();
+            updateActivity.setName(activity.getName());
+            updateActivity.setEmission(activity.getEmission());
+            updateActivity.setDescription(activity.getDescription());
+            updateActivity.setCategory(activity.getCategory());
+            return activityRepository.save(updateActivity);
+        }
+        return null;
+    }
+    @DeleteMapping("{id}")
+    public void DeleteActivity(@PathVariable int id){
+        Optional<Activity> a=activityRepository.findById(id);
+        if(a.isPresent()) {
+            activityRepository.delete(a.get());
+        }
+    }
+}
