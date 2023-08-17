@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     @Autowired
     public UserSerVice userSerVice;
-    @PutMapping("{/id}")
+    @PutMapping("/{id}")
     public User changeAvatar(@PathVariable int id, @RequestParam String avatar){
         return userSerVice.changeAvatar(id, avatar);
     }

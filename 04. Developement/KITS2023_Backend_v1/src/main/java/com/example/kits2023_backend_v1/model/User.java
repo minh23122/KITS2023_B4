@@ -41,9 +41,9 @@ public class User {
     private Boolean status;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "regular_activity",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "activity_id", referencedColumnName = "id")
+            name = "regularactivity",
+            joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "activityId", referencedColumnName = "id")
     )
     private Set<Activity> activities=new HashSet<>();
 

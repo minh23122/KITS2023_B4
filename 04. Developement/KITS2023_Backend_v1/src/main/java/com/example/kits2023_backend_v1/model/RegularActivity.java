@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "regular_activity")
+@Table(name = "regularactivity")
 public class RegularActivity {
     @EmbeddedId
     private RegularActivityId id;

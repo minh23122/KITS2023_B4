@@ -17,6 +17,8 @@ public class Article {
     private String name, featureImage;
     @Column(columnDefinition = "TEXT")
     private String content;
+    @Column(columnDefinition = "boolean default false")
+    private boolean status;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User user;
