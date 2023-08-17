@@ -3,6 +3,7 @@ package com.example.kits2023_backend_v1.service;
 
 import com.example.kits2023_backend_v1.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,29 +12,31 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
+@Data
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private int id;
-
     private String name;
     private String username;
-
     private String email;
+    private String avatar;
+    private boolean status;
 
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(int id,String name, String username, String email, String password,
+    public UserDetailsImpl(int id,String name, String username, String email, String password,String avatar,boolean status,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name= name;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.avatar= avatar;
+        this.status=status;
         this.authorities = authorities;
     }
 
@@ -48,6 +51,8 @@ public class UserDetailsImpl implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
+                user.getAvatar(),
+                user.getStatus(),
                 authorities);
     }
 
