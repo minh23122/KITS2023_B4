@@ -22,7 +22,7 @@ public class RegularActivityController {
         }
         return regularActivityRepository.save(regularActivity);
     }
-    @DeleteMapping
+    @DeleteMapping()
     public void deleteRegularActivity(@RequestParam int userId, int activityId){
         RegularActivityId id=new RegularActivityId(userId,activityId);
         regularActivityRepository.deleteById(id);
