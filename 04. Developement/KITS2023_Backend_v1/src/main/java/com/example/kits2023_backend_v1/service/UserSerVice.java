@@ -124,7 +124,6 @@ public class UserSerVice {
             return ResponseEntity.notFound().build();
         }
     }
-
     public User changeAvatar(int id, String avatar){
         Optional<User> updatedUser=userRepository.findById(id);
         if(updatedUser.isPresent()){
