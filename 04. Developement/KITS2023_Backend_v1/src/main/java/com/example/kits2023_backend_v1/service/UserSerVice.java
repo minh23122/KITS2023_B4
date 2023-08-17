@@ -28,4 +28,13 @@ public class UserSerVice {
         }
         return null;
     }
+    public User changeAvatar(int id, String avatar){
+        Optional<User> updatedUser=userRepository.findById(id);
+        if(updatedUser.isPresent()){
+            User user=updatedUser.get();
+            user.setAvatar(avatar);
+            return userRepository.save(user);
+        }
+        return null;
+    }
 }

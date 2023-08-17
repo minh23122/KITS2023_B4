@@ -8,15 +8,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "activityfootprint")
-public class ActivityFootprint {
+@Table(name = "regular_activity")
+public class RegularActivity {
     @EmbeddedId
-    private ActivityFootprintId id;
+    private RegularActivityId id;
     private double volumn;
-
 
 }

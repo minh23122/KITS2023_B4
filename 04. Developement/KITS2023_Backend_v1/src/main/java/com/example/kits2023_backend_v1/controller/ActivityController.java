@@ -22,7 +22,7 @@ public class ActivityController {
         if(activityRepository.existsById(activity.getId())) return null;
         return activityRepository.save(activity);
     }
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public Activity updateActivity(@PathVariable int id,@RequestBody Activity activity){
         Optional<Activity> u=activityRepository.findById(id);
         if(u.isPresent()){
