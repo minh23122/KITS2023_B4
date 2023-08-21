@@ -22,10 +22,10 @@ public class CategoryController {
     public Category insertCategory(@RequestBody Category category){
         return categoryRepository.save(category);
     }
-    @DeleteMapping("{id}")
-    public void deleteCategory(@PathVariable int id){
-        categoryRepository.deleteById(id);
-    }
+//    @DeleteMapping("{id}")
+//    public void deleteCategory(@PathVariable int id){
+//        categoryRepository.deleteById(id);
+//    }
     @PutMapping("{id}")
     public Category updateCategory(@PathVariable int id, @RequestBody Category category){
         Category updateCategory=categoryRepository.findById(id).get();
