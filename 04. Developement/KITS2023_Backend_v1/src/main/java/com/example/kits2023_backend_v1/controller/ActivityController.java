@@ -36,11 +36,11 @@ public class ActivityController {
         }
         return null;
     }
-    @DeleteMapping("{id}")
-    public void DeleteActivity(@PathVariable int id){
-        Optional<Activity> a=activityRepository.findById(id);
-        if(a.isPresent()) {
-            activityRepository.delete(a.get());
-        }
-    }
+//    @DeleteMapping("{id}")
+//    public void DeleteActivity(@PathVariable int id){
+//        Optional<Activity> a=activityRepository.findById(id);
+//        if(a.isPresent()) {
+//            activityRepository.delete(a.get());
+//        }
+//    }
 }

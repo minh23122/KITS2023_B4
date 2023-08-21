@@ -16,4 +16,8 @@ public class ActivityFootprintController{
     public ActivityFootprint insertActivityFootprint(@RequestBody ActivityFootprint activityFootprint){
         return activityFootprintService.insertActivityFootprint(activityFootprint);
     }
+    @PutMapping()
+    public ActivityFootprint updateActivityFootprint(@RequestBody ActivityFootprint activityFootprint){
+        return activityFootprintService.updateActivityFootprint(activityFootprint);
+    }
 }
