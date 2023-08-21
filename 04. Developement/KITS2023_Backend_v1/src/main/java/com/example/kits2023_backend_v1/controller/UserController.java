@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/user")
@@ -27,6 +29,9 @@ public class UserController {
     public ResponseEntity<String> checkPassword(@PathVariable int id,@RequestParam String password){
         return userSerVice.checkPassword(id,password);
     }
-
+    @GetMapping("/rank3/{date}")
+    public List<User> getRank3(@PathVariable String date){
+        return userSerVice.getRank3(date);
+    }
 
 }
