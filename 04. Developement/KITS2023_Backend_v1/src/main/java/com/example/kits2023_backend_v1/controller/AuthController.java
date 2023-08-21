@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/auth")
+
 public class AuthController {
     @Autowired
     AuthenticationManager authenticationManager;
@@ -59,7 +60,6 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        System.out.println(userDetails.getName());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),

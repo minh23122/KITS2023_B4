@@ -2,6 +2,7 @@ package com.example.kits2023_backend_v1.controller;
 
 import com.example.kits2023_backend_v1.model.User;
 import com.example.kits2023_backend_v1.repository.UserRepository;
+import com.example.kits2023_backend_v1.response.GenericApiResponse;
 import com.example.kits2023_backend_v1.service.UserSerVice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/admin")
+
 public class AdminController {
     @Autowired
     UserSerVice userSerVice;
@@ -26,11 +29,12 @@ public class AdminController {
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
     @PutMapping("/lock/{id}")
-    public ResponseEntity<String> lockUser(@PathVariable int id){
+    public ResponseEntity<GenericApiResponse<User>> lockUser(@PathVariable int id){
+
         return userSerVice.lockUserById(id);
     }
     @PutMapping("/unlock/{id}")
-    public ResponseEntity<String> unLockUser(@PathVariable int id){
+    public ResponseEntity<GenericApiResponse<User>> unLockUser(@PathVariable int id){
         return userSerVice.unLockUserById(id);
     }
 
