@@ -7,11 +7,13 @@ import com.example.kits2023_backend_v1.model.User;
 import com.example.kits2023_backend_v1.repository.RoleRepository;
 import com.example.kits2023_backend_v1.repository.UserRepository;
 import com.example.kits2023_backend_v1.response.GenericApiResponse;
+import com.example.kits2023_backend_v1.response.MessageResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,9 @@ public class UserSerVice {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    ImageService imageService;
 
     @Autowired
     PasswordEncoder encoder;
@@ -141,14 +146,19 @@ public class UserSerVice {
         }
     }
 
-    public User changeAvatar(int id, String avatar){
-        Optional<User> updatedUser=userRepository.findById(id);
-        if(updatedUser.isPresent()){
-            User user=updatedUser.get();
-            user.setAvatar(avatar);
-            return userRepository.save(user);
+    public ResponseEntity<?> changeAvatar(int id, MultipartFile file) {
+        Optional<User> updatedUser = userRepository.findById(id);
+        if (updatedUser.isPresent()) {
+            User user = updatedUser.get();
+            String imageURL = imageService.create(file);
+            user.setAvatar(imageURL);
+            userRepository.save(user);
+
+            return ResponseEntity.ok(new MessageResponse("Avatar changed successfully!"));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("User not found"));
         }
-        return null;
     }
     public ResponseEntity<GenericApiResponse<User>> getUserByUserName(String username) {
         Optional<User> optionalUser = userRepository.findByUsername(username);

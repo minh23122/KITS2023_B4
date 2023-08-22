@@ -89,6 +89,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                                 .requestMatchers("/api/category/**").hasRole("ADMIN")
                                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/api/article/**").permitAll()
+//                                .requestMatchers("/swagger-ui/**").permitAll()
                                 .anyRequest().authenticated()
                 );
 
