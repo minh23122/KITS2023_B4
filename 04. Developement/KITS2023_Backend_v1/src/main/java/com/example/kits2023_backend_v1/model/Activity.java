@@ -17,6 +17,9 @@ public class Activity {
     @Column(nullable = false, unique = true)
     private String name;
     private String description;
+    private String unit;
+    @Column(name = "maxvolumn")
+    private double maxvolumn;
     @Column(nullable = false)
     private double emission;
     @ManyToOne(cascade = CascadeType.ALL)

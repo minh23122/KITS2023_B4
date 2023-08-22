@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useEffect } from 'react';
 import { Col, InputNumber, Row, Slider} from 'antd'; 
 import './App.css';
 import { Link } from 'react-router-dom';
@@ -7,27 +8,40 @@ import Cloud2 from './assets/cloud2.png'
 import FoodImg from './assets/FoodCategoryDesktop.png'
 import Heading from '../Heading/Heading';
 import { RightCircleOutlined  } from '@ant-design/icons'
+import axios from 'axios';
 function App() {
-  const [beefInputValue, setBeefInputValue] = useState(1);
-  const beef = (beefValue) => {
-    setBeefInputValue(beefValue);
-  };
-  const [porkInputValue, setPorkInputValue] = useState(1);
-  const Pork = (porkValue) => {
-    setPorkInputValue(porkValue);
-  };
-  const [poultryInputValue, setPoultryInputValue] = useState(1);
-  const Poultry = (poultryValue) => {
-    setPoultryInputValue(poultryValue);
-  };
-  const [fishInputValue, setFishInputValue] = useState(1);
-  const Fish = (fishValue) => {
-    setFishInputValue(fishValue);
-  };
-  const [eggsInputValue, setEggsInputValue] = useState(1);
-  const Eggs = (eggsValue) => {
-    setEggsInputValue(eggsValue);
-  };
+  const [activity, setActivity]=useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8080/api/activity/category/1');
+        setActivity(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []); 
+  // const [beefInputValue, setBeefInputValue] = useState(1);
+  // const beef = (beefValue) => {
+  //   setBeefInputValue(beefValue);
+  // };
+  // const [porkInputValue, setPorkInputValue] = useState(1);
+  // const Pork = (porkValue) => {
+  //   setPorkInputValue(porkValue);
+  // };
+  // const [poultryInputValue, setPoultryInputValue] = useState(1);
+  // const Poultry = (poultryValue) => {
+  //   setPoultryInputValue(poultryValue);
+  // };
+  // const [fishInputValue, setFishInputValue] = useState(1);
+  // const Fish = (fishValue) => {
+  //   setFishInputValue(fishValue);
+  // };
+  // const [eggsInputValue, setEggsInputValue] = useState(1);
+  // const Eggs = (eggsValue) => {
+  //   setEggsInputValue(eggsValue);
+  // };
   return (
     <>
       <div className='container5'>
@@ -42,8 +56,8 @@ function App() {
           <Link to='/travelled'><RightCircleOutlined className='rightIcon'/></Link>
           <p className='caption'>FOOT</p>
           <h1 className='title'>How often do you eat animal-based products?</h1>
-          <h2 className='sub_title'> (beef, pork, chicken, fish, eggs, dairy products)</h2>
-          <Row>
+          <h2 className='sub_title'>{activity.map((a)=>a.name+" ")}</h2>
+          {/* <Row>
             <Col span={4}>
               <h2>Beef</h2>
             </Col>
@@ -67,8 +81,8 @@ function App() {
                 onChange={beef}
               />
             </Col>
-          </Row>
-          <Row>
+          </Row> */}
+          {/* <Row>
             <Col span={4}>
               <h2>Pork</h2>
             </Col>
@@ -167,7 +181,20 @@ function App() {
                 onChange={Eggs}
               />
             </Col>
+          </Row> */}
+          {activity.map((e)=>
+          <Row>
+            <Col span={4}><h2>{e.name.toUpperCase()}</h2></Col>
+            <Col span={15}>
+            <Slider
+                min={0}
+                max={e.maxvolumn}
+                step={0.1}
+                // value={typeof beefInputValue === 'number' ? beefInputValue : 0}
+              />
+            </Col>
           </Row>
+          )}
         </div>
         <div className='houseImg' style={{
                     backgroundImage: `url(${FoodImg})`,

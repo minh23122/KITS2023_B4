@@ -27,6 +27,30 @@ import AdminArticle from './Admin/Article';
 import AdminAnalysis from './Admin/Analysis';
 
 function App() {
+  // const router = createBrowserRouter([
+  //   {
+  //     path: "/",
+  //     element: <App />,
+  //     children: [
+  //       {
+  //         index: true,
+  //         element: <Dashboard/>,
+  //       },
+  //       {
+  //         path: "food",
+  //         element: <Food/>,
+  //       },
+  //       {
+  //         path: "admin",
+  //         element: <Admin/>,
+  //       },
+  //       {
+  //         path: "activities",
+  //         element: <AdminActivity/>,
+  //       },
+  //     ],
+  //   },
+  // ]);
   return (
     <Router>
       <Routes>
