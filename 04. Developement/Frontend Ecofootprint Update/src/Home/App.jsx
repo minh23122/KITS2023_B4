@@ -2,10 +2,16 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom';
 import { CloseCircleOutlined  } from '@ant-design/icons'
 import './App.css'
+import axios from 'axios';
 import Anhchinh from './assets/HousingRenewableResourcesDesktop.png'
 import cloud from './assets/cloud1.png'
 import logo from './assets/logo.png'
 function App() {
+  const [name,setName]= useState('');
+  const [userName,setUserName]= useState('');
+  const [passWord,setPassWord]= useState('');
+  const [email,setEmail]= useState('');
+
   const [isPopupOpenLogin, setIsPopupOpenLogin] = useState(false);
   const [isPopupOpenRegister, setIsPopupOpenRegister] = useState(false);
   const turnOnRegister= ()=>{
@@ -16,6 +22,28 @@ function App() {
   const togglePopup = () => {
     setIsPopupOpenLogin(!isPopupOpenLogin);
     setIsPopupOpenRegister(false)
+  };
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await axios({
+        url: "http://localhost:8080/api/auth/signup",
+        headers: {"Content-Type" : "application/json"},
+        method: "post",
+        data: {
+        name: name,
+        username: userName,
+        password: passWord,
+        email: email,
+        }
+      })
+
+      console.log("REs", response)
+    } catch (e) {
+      alert("Đăng ký không thành công")
+      console.error(e)}
+
   };
   return (
     <>
@@ -63,12 +91,12 @@ function App() {
             <div className="popup-content">
               <CloseCircleOutlined onClick={togglePopup} style={{float:"right"}}/>
               <h2 style={{textAlign: "center"}}>Register Account</h2>
-              <form style={{paddingRight: "18px"}}>
-                <input type="text" placeholder="Username" />
-                <input type="password" placeholder="Password" />
-                <input type="password" placeholder="Repassword" />
-                <input type="text" placeholder="Phone number" />
-                <input type="text" placeholder="Address" />
+              <form style={{paddingRight: "18px"}} onSubmit={handleRegister}>
+                <input type="text" value={name} onInput={(evt)=>setName(evt.target.value)} placeholder="Name" />
+                <input type="text" value={userName} onInput={(evt)=>setUserName(evt.target.value)} placeholder="Username" />
+                <input type="password" value={passWord} onInput={(evt)=>setPassWord(evt.target.value)} placeholder="Password" />
+                <input type="password"  placeholder="Repassword" />
+                <input type="email" value={email} onInput={(evt)=>setEmail(evt.target.value)} placeholder="Email" />
                 <button type="submit">Register</button>
               </form>
             </div>
