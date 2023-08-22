@@ -212,5 +212,7 @@ public class UserSerVice {
             return ResponseEntity.notFound().build();
         }
     }
-
+    public List<User> getRank3(String date){
+        return userRepository.getRank3User(date);
+    }
 }
