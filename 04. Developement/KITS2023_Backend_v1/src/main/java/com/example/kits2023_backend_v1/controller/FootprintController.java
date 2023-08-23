@@ -1,5 +1,6 @@
 package com.example.kits2023_backend_v1.controller;
 
+import com.example.kits2023_backend_v1.model.Activity;
 import com.example.kits2023_backend_v1.model.Footprint;
 import com.example.kits2023_backend_v1.repository.FootprintRepository;
 import com.example.kits2023_backend_v1.repository.UserRepository;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -38,5 +40,15 @@ public class FootprintController {
         fp.setDate(currentDate);
         fp.setUser(userRepository.findById(userId).get());
         return footprintRepository.save(fp);
+    }
+    @GetMapping("/percentCategory/{footprintId}/{categoryId}")
+    public double getPercentOfCategory(@PathVariable int footprintId, @PathVariable int categoryId){
+        double totalThisCategory= footprintRepository.getEmissionByCategoryId(footprintId, categoryId);
+        double totalEmission=footprintRepository.getTotalEmission(footprintId);
+        return totalThisCategory/totalEmission;
+    }
+    @GetMapping("/rank3")
+    public List<Footprint> rank3Fp(){
+        return footprintRepository.getRank3();
     }
 }

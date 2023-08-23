@@ -66,7 +66,7 @@ function App() {
       });
       console.log("Res", response);
     } catch (e) {
-      alert("Đăng ký không thành công");
+      alert("Register unsucessfully!!!");
       console.error(e);
     }
   };

@@ -36,6 +36,7 @@ public class ActivityController {
         }
         return null;
     }
+    // get by
     @GetMapping("/category/{categoryId}")
     public List<Activity> getCategoryById(@PathVariable int categoryId){
         return activityRepository.findByCategory_Id(categoryId);

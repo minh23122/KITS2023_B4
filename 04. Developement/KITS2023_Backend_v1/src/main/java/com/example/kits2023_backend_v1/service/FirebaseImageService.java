@@ -34,7 +34,7 @@ public class FirebaseImageService implements IImageService {
 
             ClassPathResource serviceAccount = new ClassPathResource("firebase.json");
 
-            FirebaseOptions options = new FirebaseOptions.Builder()
+            FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(serviceAccount.getInputStream()))
                     .setStorageBucket(properties.getBucketName())
                     .build();
