@@ -93,7 +93,9 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 //                                .requestMatchers("/swagger-ui/**").permitAll()
                                 .requestMatchers("/api/af/**").hasRole("USER")
                                 .requestMatchers("/api/regularactivity/**").hasRole("USER")
+                                .requestMatchers("/api/footprint/**").permitAll()
                                 .anyRequest().authenticated()
+
                 );
 
         http.authenticationProvider(authenticationProvider());
