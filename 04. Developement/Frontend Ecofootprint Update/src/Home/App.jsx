@@ -23,7 +23,12 @@ function App() {
     setIsPopupOpenLogin(!isPopupOpenLogin);
     setIsPopupOpenRegister(!isPopupOpenRegister);
   };
-
+  const token=localStorage.getItem("token");
+  useEffect(()=>{
+    if(token){
+      navigate("/food");
+    }
+  },[token, navigate])
   const handleClickLogin = async (event) => {
     event.preventDefault();
     try {
@@ -36,10 +41,16 @@ function App() {
         },
         method: "post"
       });
-      console.log(response.data);
+      localStorage.setItem("name", (response.data.name));
+      localStorage.setItem("username", (response.data.username));
+      localStorage.setItem("avatar", (response.data.avatar));
+      localStorage.setItem("email", (response.data.email));
+      
       const token = response.data.token;
       localStorage.setItem("token", token);
       const role = response.data.roles;
+      console.log(response.data.name);
+      console.log("username:"+response.data.username);
       navigate("/food");
     } catch (error) {
       alert("Tên đăng nhập hoặc mật khẩu không chính xác");

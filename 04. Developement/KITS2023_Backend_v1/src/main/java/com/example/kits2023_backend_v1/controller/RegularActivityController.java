@@ -6,6 +6,7 @@ import com.example.kits2023_backend_v1.repository.RegularActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -24,9 +25,14 @@ public class RegularActivityController {
         }
         return regularActivityRepository.save(regularActivity);
     }
+
     @DeleteMapping()
     public void deleteRegularActivity(@RequestParam int userId, int activityId){
         RegularActivityId id=new RegularActivityId(userId,activityId);
         regularActivityRepository.deleteById(id);
+    }
+    @GetMapping("/user/{userId}")
+    public List<RegularActivity> list(@PathVariable int userId){
+        return regularActivityRepository.findById_UserId(userId);
     }
 }

@@ -45,7 +45,7 @@ public class FootprintController {
     public double getPercentOfCategory(@PathVariable int footprintId, @PathVariable int categoryId){
         double totalThisCategory= footprintRepository.getEmissionByCategoryId(footprintId, categoryId);
         double totalEmission=footprintRepository.getTotalEmission(footprintId);
-        return totalThisCategory/totalEmission;
+        return totalThisCategory;
     }
     @GetMapping("/rank3")
     public List<Footprint> rank3Fp(){
