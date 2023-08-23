@@ -62,13 +62,13 @@ public class ArticleController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createArticle(@RequestParam("name") String name, @RequestParam("featureImage") MultipartFile featureImage, @RequestParam("content") MultipartFile content, @RequestParam("id") int id) {
+    public ResponseEntity<?> createArticle(@RequestParam("name") String name, @RequestParam("featureImage") MultipartFile featureImage, @RequestParam("content") MultipartFile content, @RequestParam("userid") int userid) {
         String imageURL = imageService.create(featureImage);
         String contentURL = imageService.create(content);
-        return articleService.createArticle(name, imageURL, contentURL, id);
+        return articleService.createArticle(name, imageURL, contentURL, userid);
     }
 
-    @PutMapping("/chaneFeature")
+    @PutMapping("/changeFeature")
     public ResponseEntity<GenericApiResponse<Article>> changeFeatureImage(@RequestParam("featureImage") MultipartFile featureImage, int id) {
         return articleService.changeFeatureImage(id, featureImage);
     }
