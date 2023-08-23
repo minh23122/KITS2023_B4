@@ -27,6 +27,15 @@ public class ArticleService {
     public List<Article> getListArticle(){
         return  articleRepository.findAll();
     }
+    public ResponseEntity<?> getListArticleToApproval(){
+        List<Article> articles = articleRepository.getListArticleToApproval();
+        if(articles.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No posts need approval.");
+        }
+        else{
+            return ResponseEntity.ok(articles);
+        }
+    }
 
     public ResponseEntity<GenericApiResponse<Article>> getArticleById(int id){
         Optional<Article> article = articleRepository.findArticleById(id);
@@ -39,7 +48,17 @@ public class ArticleService {
             return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
         }
     }
-
+    public ResponseEntity<GenericApiResponse<Article>> getArticleByName(String name){
+        Optional<Article> article = articleRepository.findArticleByName(name);
+        if(article.isPresent()){
+            GenericApiResponse<Article> apiResponse = new GenericApiResponse<>("" ,"200", article.get());
+            return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+        }
+        else{
+            GenericApiResponse<Article> apiResponse = new GenericApiResponse<>("Article with name " + name + " does not exist.", "404", null);
+            return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+        }
+    }
 
     public ResponseEntity<?> createArticle(String name, String featureImage, String content, int userId) {
         Optional<Article> a = articleRepository.findArticleByName(name);
@@ -97,4 +116,16 @@ public class ArticleService {
             return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
         }
     }
+    public ResponseEntity<?> deleteArticleById(int id) {
+        Optional<Article> article = articleRepository.findById(id);
+        if (article.isPresent()) {
+            articleRepository.delete(article.get());
+
+            return ResponseEntity.ok(new MessageResponse("The article has been deleted"));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new MessageResponse("Article not found"));
+        }
+    }
+
     }
