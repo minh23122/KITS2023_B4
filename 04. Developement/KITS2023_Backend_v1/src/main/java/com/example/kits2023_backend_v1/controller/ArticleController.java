@@ -30,9 +30,18 @@ public class ArticleController {
     public List<Article> getAllArticle(){
         return articleService.getListArticle();
     }
+
+    @GetMapping("/listApproval")
+    public ResponseEntity<?> findListArticleToApproval(){
+        return articleService.getListArticleToApproval();
+    }
     @GetMapping("/{id}")
-    public ResponseEntity<GenericApiResponse<Article>> findArticleById(int id){
+    public ResponseEntity<GenericApiResponse<Article>> findArticleById(@PathVariable  int id){
         return articleService.getArticleById(id);
+    }
+    @GetMapping("/{name}")
+    public ResponseEntity<GenericApiResponse<Article>> findArticleByName(@RequestParam String  name){
+        return articleService.getArticleByName(name);
     }
 
 
@@ -45,6 +54,11 @@ public class ArticleController {
             return articleRepository.save(article);
         }
         return null;
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteArticleById(@PathVariable int id){
+        return articleService.deleteArticleById(id);
     }
 
     @PostMapping
