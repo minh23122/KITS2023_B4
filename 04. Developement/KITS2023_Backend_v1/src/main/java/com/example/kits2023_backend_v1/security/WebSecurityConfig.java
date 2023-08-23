@@ -94,6 +94,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                                 .requestMatchers("/api/af/**").hasRole("USER")
                                 .requestMatchers("/api/regularactivity/**").hasRole("USER")
                                 .requestMatchers("/api/footprint/**").permitAll()
+                                .requestMatchers("/api/regularactivity/**").hasRole("USER")
                                 .anyRequest().authenticated()
 
                 );

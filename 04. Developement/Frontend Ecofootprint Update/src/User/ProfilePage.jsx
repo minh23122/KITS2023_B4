@@ -24,14 +24,16 @@ function ProfilePage() {
     setIsModalVisible(false);
     form.resetFields();
   };
-
+  const token=localStorage.getItem("token");
+  console.log(token);
+  const userInfo=localStorage.getItem("userInfo");
   return (
     <div className="profile-page-container">
       <h2>Your Profile</h2>
-      <Image preview={false} style={{width:'25%'}} src={avatar} className='avatar1'/>
-      <h4>Nguyen Van Linh</h4>
-      <h4>Thanh Xuan, Ha Noi</h4>
-      <h4>nguyenvanlinh@gmail.com</h4>
+      <Image preview={false} style={{width:'25%'}} src={localStorage.getItem("avatar")} className='avatar1'/>
+      <h4>{localStorage.getItem("name")}</h4>
+      <h4>{localStorage.getItem("username")}</h4>
+      <h4>{localStorage.getItem("email")}</h4>
       <Button icon={<EditOutlined />} onClick={showModal}>
         Edit Profile
       </Button>
