@@ -212,7 +212,12 @@ public class UserSerVice {
             return ResponseEntity.notFound().build();
         }
     }
-
+    public long countUser(){
+        return userRepository.countUser();
+    }
+    public List<User> getListUser(){
+        return userRepository.getListUser();
+    }
     public List<User> getRank3(String date){
         return userRepository.getRank3User(date);
     }

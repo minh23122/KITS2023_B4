@@ -17,21 +17,24 @@ import java.util.List;
 public class UserController {
     @Autowired
     public UserSerVice userSerVice;
+
     @PutMapping("/{id}")
-    public ResponseEntity<?> changeAvatar(@PathVariable int id, @RequestParam("file") MultipartFile file){
-        return userSerVice.changeAvatar(id,file);
+    public ResponseEntity<?> changeAvatar(@PathVariable int id, @RequestParam("file") MultipartFile file) {
+        return userSerVice.changeAvatar(id, file);
     }
+
     @PutMapping("/changePassword/{id}")
-    public ResponseEntity<GenericApiResponse<User>> changePassWord(@PathVariable int id,@RequestParam String newPassWord){
-        return userSerVice.changePassword(id,newPassWord);
+    public ResponseEntity<GenericApiResponse<User>> changePassWord(@PathVariable int id, @RequestParam String newPassWord) {
+        return userSerVice.changePassword(id, newPassWord);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<String> checkPassword(@PathVariable int id,@RequestParam String password){
-        return userSerVice.checkPassword(id,password);
+    public ResponseEntity<String> checkPassword(@PathVariable int id, @RequestParam String password) {
+        return userSerVice.checkPassword(id, password);
     }
+
     @GetMapping("/rank3/{date}")
-    public List<User> getRank3(@PathVariable String date){
+    public List<User> getRank3(@PathVariable String date) {
         return userSerVice.getRank3(date);
     }
 

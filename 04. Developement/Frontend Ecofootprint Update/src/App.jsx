@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home/App'
 import Food from './Food/App'
 import DistanceTravelled from './Transportation/DistanceTravelled'
-import Fuel from './Transportation/Fuel'
 import House from './House/House'
 import Trash from './Trash/Trash';
 
@@ -27,30 +26,6 @@ import AdminArticle from './Admin/Article';
 import AdminAnalysis from './Admin/Analysis';
 
 function App() {
-  // const router = createBrowserRouter([
-  //   {
-  //     path: "/",
-  //     element: <App />,
-  //     children: [
-  //       {
-  //         index: true,
-  //         element: <Dashboard/>,
-  //       },
-  //       {
-  //         path: "food",
-  //         element: <Food/>,
-  //       },
-  //       {
-  //         path: "admin",
-  //         element: <Admin/>,
-  //       },
-  //       {
-  //         path: "activities",
-  //         element: <AdminActivity/>,
-  //       },
-  //     ],
-  //   },
-  // ]);
   return (
     <Router>
       <Routes>
@@ -58,7 +33,6 @@ function App() {
         <Route path="/food" element={<Food />} />
         <Route path="/house" element={<House />} />
         <Route path="/travelled" element={<DistanceTravelled />} />
-        <Route path="/fuel" element={<Fuel />} />
         <Route path="/trash" element={<Trash />} />
         <Route path="/user" element={<User />} />
         <Route path="/user/activity" element={<Activity />} />

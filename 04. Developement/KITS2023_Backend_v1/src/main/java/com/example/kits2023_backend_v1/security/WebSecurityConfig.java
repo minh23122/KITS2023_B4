@@ -3,6 +3,7 @@ package com.example.kits2023_backend_v1.security;
 
 import com.example.kits2023_backend_v1.jwts.AuthEntryPointJwt;
 import com.example.kits2023_backend_v1.jwts.AuthTokenFilter;
+import com.example.kits2023_backend_v1.model.ERole;
 import com.example.kits2023_backend_v1.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -87,16 +88,21 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("/api/auth/**").permitAll()
-                                .requestMatchers("api/activity/category/**").permitAll()
-                                .requestMatchers("/api/test/**").permitAll()
-                                .requestMatchers("/api/category/**").hasRole("ADMIN")
-                                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                                .requestMatchers("/api/article/**").permitAll()
+                                auth.requestMatchers("/api/auth/**").permitAll()
+                                        .requestMatchers("api/activity/category/**").permitAll()
+                                        .requestMatchers("/api/test/**").permitAll()
+                                        .requestMatchers("/api/category/**").hasRole("ADMIN")
+                                        .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                                        .requestMatchers("/api/article/**").permitAll()
 //                                .requestMatchers("/swagger-ui/**").permitAll()
-                                .requestMatchers("/api/af/**").hasRole("USER")
-                                .requestMatchers("/api/regularactivity/**").hasRole("USER")
-                                .anyRequest().authenticated()
+//                                .requestMatchers("/user/admin/**").hasRole("ADMIN")
+                                        .requestMatchers("/api/af/**").hasRole("USER")
+                                        .requestMatchers("/api/regularactivity/**").hasRole("USER")
+                                        .requestMatchers("/api/footprint/**").permitAll()
+                                        .requestMatchers("/api/regularactivity/**").hasRole("USER")
+                                        .requestMatchers("api/footprint/**").hasRole("USER")
+                                        .anyRequest().authenticated()
+
                 );
 
         http.authenticationProvider(authenticationProvider());

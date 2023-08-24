@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Form, Input, message } from 'antd';
+import axios from 'axios';
 
 function AccountSettingsPage() {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-
+  const [password, setPassword]=useState("");
   const onFinish = (values) => {
     setLoading(true);
     setTimeout(() => {
@@ -14,10 +15,28 @@ function AccountSettingsPage() {
       form.resetFields();
     }, 1500);
   };
-
+  const userId=localStorage.getItem("userId");
+  const token=localStorage.getItem("token");
+  const handleClickSubmit=async()=>{
+    try{
+      const response=await axios({
+        url:`http://localhost:8080/api/user/changePassword/${userId}?newPassWord=${password}`,
+        method: "PUT",
+        headers:{
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        }
+      })
+      alert("Change sucsess");
+    }
+    catch(error){
+      console.error(error)
+    }
+  }  
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
+  console.log(password);
 
   return (
     <div className="account-settings-page">
@@ -29,30 +48,14 @@ function AccountSettingsPage() {
         layout="vertical"
       >
         <Form.Item
-          label="Full Name"
-          name="fullName"
-          rules={[{ required: true, message: 'Please enter your full name' }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            { required: true, message: 'Please enter your email' },
-            { type: 'email', message: 'Please enter a valid email' },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
           label="New Password"
           name="newPassword"
           rules={[
             { min: 6, message: 'Password must be at least 6 characters' },
           ]}
+          
         >
-          <Input.Password />
+          <Input.Password value={password} onChange={e=>setPassword(e.target.value)}/>
         </Form.Item>
         <Form.Item
           label="Confirm New Password"
@@ -75,7 +78,7 @@ function AccountSettingsPage() {
           <Input.Password />
         </Form.Item>
         <Form.Item>
-          <button loading={loading} style={{backgroundColor:'#ccc', marginBottom:'10px',marginLeft:'40%'}}>Submit</button>
+          <button loading={loading} style={{backgroundColor:'#ccc', marginBottom:'10px',marginLeft:'40%'}} onClick={handleClickSubmit}>Submit</button>
         </Form.Item>
       </Form>
     </div>

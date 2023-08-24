@@ -68,7 +68,7 @@ public class ArticleController {
         return articleService.createArticle(name, imageURL, contentURL, userid);
     }
 
-    @PutMapping("/chaneFeature")
+    @PutMapping("/changeFeature")
     public ResponseEntity<GenericApiResponse<Article>> changeFeatureImage(@RequestParam("featureImage") MultipartFile featureImage, int id) {
         return articleService.changeFeatureImage(id, featureImage);
     }

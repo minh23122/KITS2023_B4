@@ -28,4 +28,7 @@ public class ActivityFootprintService {
         if(updateActivityFootPrint.isPresent())  return activityFootprintRepository.save(activityFootprint);
         return null;
     }
+    public Optional<ActivityFootprint> findById(int activityId, int footprintId){
+        return activityFootprintRepository.findById_ActivityIdAndId_FootprintId(activityId,footprintId);
+    }
 }
