@@ -41,6 +41,10 @@ public class ActivityController {
     public List<Activity> getCategoryById(@PathVariable int categoryId){
         return activityRepository.findByCategory_Id(categoryId);
     }
+    @GetMapping("/count")
+    public long countAllActivity(){
+        return activityRepository.count();
+    }
 //    @DeleteMapping("{id}")
 //    public void DeleteActivity(@PathVariable int id){
 //        Optional<Activity> a=activityRepository.findById(id);

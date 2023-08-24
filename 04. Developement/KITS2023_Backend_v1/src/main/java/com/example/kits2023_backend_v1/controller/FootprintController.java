@@ -41,14 +41,18 @@ public class FootprintController {
         fp.setUser(userRepository.findById(userId).get());
         return footprintRepository.save(fp);
     }
-    @GetMapping("/percentCategory/{footprintId}/{categoryId}")
+    @GetMapping("emission/percentCategory/{footprintId}/{categoryId}")
     public double getPercentOfCategory(@PathVariable int footprintId, @PathVariable int categoryId){
         double totalThisCategory= footprintRepository.getEmissionByCategoryId(footprintId, categoryId);
         double totalEmission=footprintRepository.getTotalEmission(footprintId);
         return totalThisCategory;
     }
-    @GetMapping("/rank3")
-    public List<Footprint> rank3Fp(){
-        return footprintRepository.getRank3();
+    @GetMapping("emission/user/date/category")
+    public double getCategoryEmission(@RequestParam int userId, @RequestParam String date, @RequestParam int categoryId){
+        return footprintRepository.getEmissionByUserDateCategory(userId,date,categoryId);
     }
+//    @GetMapping("emission/rank3/{date}")
+//    public List<Footprint> rank3Fp(@PathVariable String date){
+//        return footprintRepository.getRank3(date);
+//    }
 }

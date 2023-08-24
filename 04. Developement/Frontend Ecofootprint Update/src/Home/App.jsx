@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import { CloseCircleOutlined } from "@ant-design/icons";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
 import Anhchinh from "./assets/HousingRenewableResourcesDesktop.png";
@@ -23,12 +23,15 @@ function App() {
     setIsPopupOpenLogin(!isPopupOpenLogin);
     setIsPopupOpenRegister(!isPopupOpenRegister);
   };
-  const token=localStorage.getItem("token");
-  useEffect(()=>{
-    if(token){
-      navigate("/food");
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
+
+  useEffect(() => {
+    if (token) {
+      if(role=='user') navigate("/food");
+      else navigate('/admin')
     }
-  },[token, navigate])
+  }, [token, navigate]);
   const handleClickLogin = async (event) => {
     event.preventDefault();
     try {
@@ -39,19 +42,23 @@ function App() {
           username: loginUser,
           password: loginPsw,
         },
-        method: "post"
+        method: "post",
       });
-      localStorage.setItem("name", (response.data.name));
-      localStorage.setItem("username", (response.data.username));
-      localStorage.setItem("avatar", (response.data.avatar));
-      localStorage.setItem("email", (response.data.email));
-      
+      localStorage.setItem("userId", response.data.id);
+      localStorage.setItem("name", response.data.name);
+      localStorage.setItem("username", response.data.username);
+      localStorage.setItem("avatar", response.data.avatar);
+      localStorage.setItem("email", response.data.email);
       const token = response.data.token;
       localStorage.setItem("token", token);
       const role = response.data.roles;
-      console.log(response.data.name);
-      console.log("username:"+response.data.username);
-      navigate("/food");
+      if (role.includes("ROLE_ADMIN")) {
+        localStorage.setItem("role", "admin");
+        navigate("/admin");
+      } else {
+        localStorage.setItem("role","user");
+        navigate("/food");
+      }
     } catch (error) {
       alert("Tên đăng nhập hoặc mật khẩu không chính xác");
     }
@@ -84,8 +91,8 @@ function App() {
   return (
     <>
       <Routes>
-        <Route element={<Admin/>} path="/admin"/>
-        <Route path="/food" element={<Food/>} />
+        <Route element={<Admin />} path="/admin" />
+        <Route path="/food" element={<Food />} />
       </Routes>
       <div className="container">
         <div>
@@ -126,9 +133,9 @@ function App() {
                   value={loginPsw}
                   onInput={(e) => setLoginPws(e.target.value)}
                 />
-                  <button type="submit" onClick={handleClickLogin}>
-                    Login
-                  </button>
+                <button type="submit" onClick={handleClickLogin}>
+                  Login
+                </button>
                 <button className="register" onClick={turnOnRegister}>
                   Register
                 </button>

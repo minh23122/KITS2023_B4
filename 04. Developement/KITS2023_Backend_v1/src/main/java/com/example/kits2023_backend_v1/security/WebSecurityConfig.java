@@ -80,7 +80,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable())
+        http.cors(cors-> cors.disable()).
+        csrf(csrf -> csrf.disable())
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth ->
@@ -91,6 +92,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/api/article/**").permitAll()
 //                                .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers("/user/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/api/af/**").hasRole("USER")
                                 .requestMatchers("/api/regularactivity/**").hasRole("USER")
                                 .requestMatchers("/api/footprint/**").permitAll()
