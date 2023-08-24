@@ -57,6 +57,19 @@ function App() {
         navigate("/admin");
       } else {
         localStorage.setItem("role","user");
+        try{
+          const postFootPrint=await axios({
+            method: "post",
+            url: `http://localhost:8080/api/footprint/createByUser/${response.data.id}`,
+            headers:{
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+            }
+          })
+        }
+        catch(error){
+          console.log(error)
+        }
         navigate("/food");
       }
     } catch (error) {
