@@ -36,14 +36,15 @@ public class FootprintController {
     @PostMapping("/createByUser/{userId}")
     public Footprint createFootprint(@PathVariable int userId){
         Date currentDate=Date.valueOf(LocalDate.now());
-        Optional<Footprint> getByDateAndUser=footprintRepository.getByUserIdAndDate(userId,currentDate.toString());
+        Optional<Footprint> getByDateAndUser=footprintRepository.getByUserIdAndDate(userId,currentDate);
         if(getByDateAndUser.isPresent()){
-            Footprint fp=new Footprint();
-            fp.setDate(currentDate);
-            fp.setUser(userRepository.findById(userId).get());
-            return footprintRepository.save(fp);
+            return getByDateAndUser.get();
         }
-        return null;
+        Footprint fp=new Footprint();
+        fp.setDate(currentDate);
+        fp.setUser(userRepository.findById(userId).get());
+        Footprint updateFootPrint= footprintRepository.save(fp);
+        return updateFootPrint;
     }
     @GetMapping("emission/percentCategory/{footprintId}/{categoryId}")
     public double getPercentOfCategory(@PathVariable int footprintId, @PathVariable int categoryId){

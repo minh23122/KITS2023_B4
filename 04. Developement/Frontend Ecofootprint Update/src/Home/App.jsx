@@ -66,6 +66,7 @@ function App() {
               "Content-Type": "application/json"
             }
           })
+          localStorage.setItem("footprintId", postFootPrint.data.id);
         }
         catch(error){
           console.log(error)

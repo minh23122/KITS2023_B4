@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,5 +29,5 @@ public interface FootprintRepository extends JpaRepository<Footprint, Integer> {
             "where f.user.id=:userId and f.date=:date and a.category.id=:categoryId group by f.id")
     double getEmissionByUserDateCategory(@Param("userId") int id,@Param("date") String date, @Param("categoryId") int cateogyId);
     @Query("select distinct f from Footprint f where f.user.id=:userId and f.date=:date")
-    Optional<Footprint> getByUserIdAndDate(@Param("userId") int userId, @Param("date") String date);
+    Optional<Footprint> getByUserIdAndDate(@Param("userId") int userId, @Param("date") Date date);
 }

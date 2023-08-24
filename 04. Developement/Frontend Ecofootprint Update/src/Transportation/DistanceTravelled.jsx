@@ -1,24 +1,46 @@
 import './DistanceTravelled.css';
-import { useState } from 'react'
-import { Col, Row, Slider } from 'antd';
+import { useState,useEffect } from 'react'
+import { Col, Row, Slider,InputNumber } from 'antd';
 import {Link } from 'react-router-dom';
 import cloud1 from './assets/cloud/cloud1.png'
 import cloud2 from './assets/cloud/cloud2.png'
 import cloud3 from './assets/cloud/cloud3.png'
-import carr from './assets/car.png'
-import motorbike from './assets/motorbike.png'
 import travelled from './assets/travelled/TransportationDistanceTravelledTablet.png'
 import Heading from '../Heading/Heading';
 import { RightCircleOutlined ,  LeftCircleOutlined  } from '@ant-design/icons'
+import axios from 'axios';
 function DistanceTravelled(){
-    const [carInputValue, setCarInputValue] = useState(1);
-    const car = (carValue) => {
-        setCarInputValue(carValue);
-    };
-    const [motoInputValue, setMotoInputValue] = useState(1);
-    const moto = (motoValue) => {
-        setMotoInputValue(motoValue);
-    };
+    
+    const[vehicle, setVehicle]= useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await axios.get('http://localhost:8080/api/activity/category/2');
+            setVehicle(response.data);
+          } catch (error) {
+            console.error(error);
+          }
+        };
+        fetchData();
+      }, []);
+      // State variables for slider values
+  const [sliderValues, setSliderValues] = useState({});
+
+  // Handler for slider changes
+  const handleSliderChange = (product, value) => {
+    setSliderValues(prevValues => ({
+      ...prevValues,
+      [product]: value,
+    }));
+  };
+  useEffect(() => {
+    const initialSliderValues = {};
+    vehicle.forEach(e => {
+      initialSliderValues[e.name] = 0;
+    });
+    setSliderValues(initialSliderValues);
+  }, [vehicle]);
+
     return(<>
         <div className='container3'>
             <div>
@@ -31,52 +53,43 @@ function DistanceTravelled(){
             </div>
             <div className='content2'>
                 <Link to='/food'><LeftCircleOutlined className='leftIcon'/></Link>
-                <Link to='/fuel'><RightCircleOutlined className='rightIcon'/></Link>
+                <Link to='/house'><RightCircleOutlined className='rightIcon'/></Link>
                 <p className='caption2'>TRANSPORTATION</p>
                 <h1 className='title2'>How far do you travel by car or motorcycle each day?</h1>
                 <h2 className='sub_title2'>(as a driver or passenger)</h2>
+                {vehicle.map((e)=>
                 <Row>
-                    <Col span={4}>
-                        <img src={carr} style={{width:'40px'}}/>
-                    </Col>
-                    <Col span={4}>
+                    <Col span={2}><h2>{e.name.toUpperCase()}</h2></Col>
+                    <Col span={3}>
                         <h2 className='value_kms'>ZERO</h2>
                     </Col>
                     <Col span={12}>
                         <Slider
                             min={0}
-                            max={200}
+                            max={e.maxvolumn}
                             step={1}
-                            onChange={car}
-                            value={typeof carInputValue === 'number' ? carInputValue : 0}
+                            value={sliderValues[e.name] || 0} 
+                            onChange={(value) => handleSliderChange(e.name, value)}
                         />
                     </Col>
-                    <Col span={4}>
+                    <Col span={3}>
                         <h2 className='value_kms'>VERY FAR</h2>
+</Col>
+                    <Col span={4}>
+                    <InputNumber
+                        min={0}
+                        max={20}
+                        style={{
+                            margin: '0 16px',
+                        }}
+                        value={sliderValues[e.name]+' '+e.unit || 0} 
+                        onChange={(value) => handleSliderChange(e.name, value)} 
+                    />
                     </Col>
                 </Row>
-                <h1 className='title_kms'>{carInputValue} kms</h1>
-                <Row>
-                    <Col span={4}>
-                        <img src={motorbike} style={{ width: '40px' }} />
-                    </Col>
-                    <Col span={4}>
-                        <h2 className='value_kms'>ZERO</h2>
-                    </Col>
-                    <Col span={12}>
-                        <Slider
-                            min={0}
-                            max={200}
-                            step={1}
-                            onChange={moto}
-                            value={typeof motoInputValue === 'number' ? motoInputValue : 0}
-                        />
-                    </Col>
-                    <Col span={4}>
-                        <h2 className='value_kms'>VERY FAR</h2>
-                    </Col>
-                </Row>
-                <h1 className='title_kms'>{motoInputValue} kms</h1>
+                )}
+                {/* <h1 className='title_kms'>{carInputValue} kms</h1> */}
+                
             </div>
             <div className='houseMenberImg' style={{
                 backgroundImage: `url(${travelled})`,
