@@ -22,14 +22,20 @@ public class FootprintController {
     private FootprintRepository footprintRepository;
     @Autowired
     private UserRepository userRepository;
+    @GetMapping("/totalEmission/{id}")
+    public double getToTalEmission(@PathVariable int id){
+        return footprintRepository.getTotalEmission(id);
+    }
+
     @PutMapping("/updateEmission/{id}")
     public ResponseEntity<?> updateEmission(@PathVariable int id){
         Optional<Footprint> updateOptionalFootprint=footprintRepository.findById(id);
         if(updateOptionalFootprint.isPresent()){
-            double totalEUpdate=footprintRepository.getTotalEmission(id);
+            double totalEUpdate=getToTalEmission(id);
             Footprint updateFootprint=updateOptionalFootprint.get();
             updateFootprint.setTotalEmission(totalEUpdate);
-            return ResponseEntity.ok().body(footprintRepository.save(updateFootprint));
+            footprintRepository.save(updateFootprint);
+            return ResponseEntity.ok().body(updateFootprint);
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("khong tim thay footprint");
     }

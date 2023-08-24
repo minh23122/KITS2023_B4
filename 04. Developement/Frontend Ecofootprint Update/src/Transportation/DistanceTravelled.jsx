@@ -10,12 +10,13 @@ import Heading from '../Heading/Heading';
 import { RightCircleOutlined ,  LeftCircleOutlined  } from '@ant-design/icons'
 import axios from 'axios';
 function DistanceTravelled(){
-    
+  const footprintId = localStorage.getItem("footprintId");
+  const token = localStorage.getItem("token");    
     const[vehicle, setVehicle]= useState([]);
     useEffect(() => {
         const fetchData = async () => {
           try {
-            const response = await axios.get('http://localhost:8080/api/activity/category/2');
+            const response = await axios.get('http://localhost:8080/api/activity/category/3');
             setVehicle(response.data);
           } catch (error) {
             console.error(error);
@@ -27,16 +28,72 @@ function DistanceTravelled(){
   const [sliderValues, setSliderValues] = useState({});
 
   // Handler for slider changes
-  const handleSliderChange = (product, value) => {
+  const handleSliderChange =async (product, value) => {
     setSliderValues(prevValues => ({
       ...prevValues,
       [product]: value,
     }));
+    try {
+        const findByActivityAndFootprint = await axios({
+          url: `http://localhost:8080/api/af/find/${product}/${footprintId}`,
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          data: {
+            id: {
+              activityId: product,
+              footprintId: footprintId
+            },
+            volumn: value,
+          },
+        });
+        const exist=findByActivityAndFootprint.data;
+        const count=Object.keys(exist).length;
+        console.log(count)
+        if(count>0){
+          const putAF=await axios({
+            url:"http://localhost:8080/api/af",
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+            },
+            data:{
+              id:{
+                activityId: product,
+                footprintId: footprintId
+              },
+              volumn: value
+            }
+          })  
+        }
+        else{
+          const postaf=await axios({
+            url:"http://localhost:8080/api/af",
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json"
+            },
+            data:{
+              id:{
+                activityId: product,
+                footprintId: footprintId,
+              },
+              volumn: value
+              }
+            })
+        }
+      } catch (error) {
+        
+      }
   };
   useEffect(() => {
     const initialSliderValues = {};
     vehicle.forEach(e => {
-      initialSliderValues[e.name] = 0;
+      initialSliderValues[e.id] = 0;
     });
     setSliderValues(initialSliderValues);
   }, [vehicle]);
@@ -68,8 +125,8 @@ function DistanceTravelled(){
                             min={0}
                             max={e.maxvolumn}
                             step={1}
-                            value={sliderValues[e.name] || 0} 
-                            onChange={(value) => handleSliderChange(e.name, value)}
+                            value={sliderValues[e.id] || 0} 
+                            onChange={(value) => handleSliderChange(e.id, value)}
                         />
                     </Col>
                     <Col span={3}>
@@ -82,8 +139,8 @@ function DistanceTravelled(){
                         style={{
                             margin: '0 16px',
                         }}
-                        value={sliderValues[e.name]+' '+e.unit || 0} 
-                        onChange={(value) => handleSliderChange(e.name, value)} 
+                        value={sliderValues[e.id]+' '+e.unit || 0} 
+                        onChange={(value) => handleSliderChange(e.id, value)} 
                     />
                     </Col>
                 </Row>
