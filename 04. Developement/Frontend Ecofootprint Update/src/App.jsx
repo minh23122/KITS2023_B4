@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home/App'
 import Food from './Food/App'
 import DistanceTravelled from './Transportation/DistanceTravelled'
-import Fuel from './Transportation/Fuel'
 import House from './House/House'
 import Trash from './Trash/Trash';
 
@@ -34,7 +33,6 @@ function App() {
         <Route path="/food" element={<Food />} />
         <Route path="/house" element={<House />} />
         <Route path="/travelled" element={<DistanceTravelled />} />
-        <Route path="/fuel" element={<Fuel />} />
         <Route path="/trash" element={<Trash />} />
         <Route path="/user" element={<User />} />
         <Route path="/user/activity" element={<Activity />} />

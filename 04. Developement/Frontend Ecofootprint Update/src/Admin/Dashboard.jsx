@@ -11,9 +11,21 @@ const Dashboard = () => {
   // console.log(headers)
   const getCountUser=async()=>{
     try{
-      const response=await axios.get("http://localhost:8080/api/user/admin/count",{headers})
+    //   const response=await axios.get("http://localhost:8080/api/admin/count",{headers})
+    // setCountUser(response.data);
+    // console.log(response.data)
+
+    const response = await axios({
+      method: "GET",
+      url:"http://localhost:8080/api/admin/count",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Access-Control-Allow-Origin': '*',
+        "Content-Type": "application/json" 
+      }
+    })
     setCountUser(response.data);
-    console.log(response.data)
+    console.log("res", response.data);
     }
     catch(error){
       console.log(error);

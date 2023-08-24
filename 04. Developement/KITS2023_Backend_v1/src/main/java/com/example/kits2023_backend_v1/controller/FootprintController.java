@@ -29,17 +29,22 @@ public class FootprintController {
             double totalEUpdate=footprintRepository.getTotalEmission(id);
             Footprint updateFootprint=updateOptionalFootprint.get();
             updateFootprint.setTotalEmission(totalEUpdate);
-            return ResponseEntity.ok().body(updateFootprint);
+            return ResponseEntity.ok().body(footprintRepository.save(updateFootprint));
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("khong tim thay footprint");
     }
     @PostMapping("/createByUser/{userId}")
     public Footprint createFootprint(@PathVariable int userId){
         Date currentDate=Date.valueOf(LocalDate.now());
+        Optional<Footprint> getByDateAndUser=footprintRepository.getByUserIdAndDate(userId,currentDate);
+        if(getByDateAndUser.isPresent()){
+            return getByDateAndUser.get();
+        }
         Footprint fp=new Footprint();
         fp.setDate(currentDate);
         fp.setUser(userRepository.findById(userId).get());
-        return footprintRepository.save(fp);
+        Footprint updateFootPrint= footprintRepository.save(fp);
+        return updateFootPrint;
     }
     @GetMapping("emission/percentCategory/{footprintId}/{categoryId}")
     public double getPercentOfCategory(@PathVariable int footprintId, @PathVariable int categoryId){

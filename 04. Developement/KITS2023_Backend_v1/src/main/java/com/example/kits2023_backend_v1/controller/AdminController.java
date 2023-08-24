@@ -5,7 +5,9 @@ import com.example.kits2023_backend_v1.repository.UserRepository;
 import com.example.kits2023_backend_v1.response.GenericApiResponse;
 import com.example.kits2023_backend_v1.service.UserSerVice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -36,6 +38,16 @@ public class AdminController {
     @PutMapping("/unlock/{id}")
     public ResponseEntity<GenericApiResponse<User>> unLockUser(@PathVariable int id){
         return userSerVice.unLockUserById(id);
+    }
+    @GetMapping("/count")
+    public ResponseEntity<Long> countUser() {
+        Long count = userSerVice.countUser();
+        HttpHeaders headers = new HttpHeaders();
+        return ResponseEntity.ok().headers(headers).body(count);
+    }
+    @GetMapping("/listUser")
+    public List<User> getListUser(){
+        return userSerVice.getListUser();
     }
 
     @PutMapping("/addRole/{id}")

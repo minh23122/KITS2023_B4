@@ -38,12 +38,4 @@ public class UserController {
         return userSerVice.getRank3(date);
     }
 
-    @GetMapping("admin/count")
-    public long countUser() {
-        return userSerVice.countUser();
-    }
-    @GetMapping("admin/listUser")
-    public List<User> getListUser(){
-        return userSerVice.getListUser();
-    }
 }
