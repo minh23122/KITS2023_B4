@@ -4,7 +4,7 @@ import { Row, Col, Card } from 'antd';
 const Dashboard = () => {
   const userData = 100; 
   const categoryData = 15;
-  const articleData = 300; 
+  const articleData = 300;
 
   return (
     <div style={{ padding: '20px' }}>

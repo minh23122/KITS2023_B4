@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     Optional<User> findByEmail(String email);
     @Query("select u from Footprint f join f.user u where f.date=:date group by u order by f.totalEmission limit 3")
     List<User> getRank3User(@Param("date") String date);
+
+
 }

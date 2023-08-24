@@ -82,7 +82,7 @@ public class ArticleService {
             article.setUser(user);
 
             articleRepository.save(article);
-            return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+            return ResponseEntity.ok(new MessageResponse("Create Article successfully!"));
         }
     }
 
