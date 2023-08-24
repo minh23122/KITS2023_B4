@@ -38,4 +38,9 @@ public class UserController {
         return userSerVice.getRank3(date);
     }
 
+    @PutMapping("/updateInfo")
+    public ResponseEntity<GenericApiResponse<User>> updateInfo(@PathVariable int id, @RequestParam("name") String name, @RequestParam("file") MultipartFile file){
+        return userSerVice.updateInfo(id,name,file);
+    }
+
 }

@@ -35,7 +35,7 @@ const Dashboard = () => {
     getCountUser();
   },[])
   const categoryData = 15;
-  const articleData = 300; 
+  const articleData = 300;
 
   return (
     <div style={{ padding: '20px' }}>

@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+
 @Service
 public class ImageService {
     @Autowired
@@ -30,6 +32,18 @@ public class ImageService {
 //        }
 
         return imageUrl;
+    }
+    public void delete(String url) {
+
+            try {
+                int lastSlashIndex = url.lastIndexOf('/');
+                if (lastSlashIndex != -1) {
+                    String name = url.substring(lastSlashIndex + 1);
+                    imageService.delete(name);
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
     }
     public ResponseEntity create(@RequestParam(name = "file") MultipartFile[] files) {
 

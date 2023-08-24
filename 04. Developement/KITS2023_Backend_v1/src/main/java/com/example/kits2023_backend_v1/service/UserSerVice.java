@@ -221,4 +221,23 @@ public class UserSerVice {
     public List<User> getRank3(String date){
         return userRepository.getRank3User(date);
     }
+
+    public ResponseEntity<GenericApiResponse<User>> updateInfo(int id, String name,MultipartFile file) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            // Check if the old password matches the stored password
+                // Update the password and save the user
+                String avatar= imageService.create(file);
+                user.setName(name);
+                user.setAvatar(avatar);
+                userRepository.save(user);
+                GenericApiResponse<User> apiResponse = new GenericApiResponse<>("Update Successfully", "200", user);
+                return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+            }
+        else {
+            GenericApiResponse<User> apiResponse = new GenericApiResponse<>("User with ID " + id + " does not exist.", "404", null);
+            return new ResponseEntity<>(apiResponse, HttpStatus.NOT_FOUND);
+        }
+    }
 }
