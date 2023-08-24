@@ -6,7 +6,24 @@ import globe5 from './assets/5globe.png';
 import Logo from './assets/logo.png'
 import IconUser from './assets/userIcon.png'
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 function Result(){
+    const [totale, setTotalE]=useState(0);
+    const footprintId = localStorage.getItem("footprintId");
+    const token = localStorage.getItem("token");   
+    const calculateEmission=async()=>{
+        const findByActivityAndFootprint = await axios({
+            url: `http://localhost:8080/api/footprint/updateEmission/${footprintId}`,
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+              }
+          });
+          setTotalE(findByActivityAndFootprint.data.totalEmission);
+    }
+    calculateEmission();
+
     return(
         <>
             <div className='radial-gradient'>
@@ -45,10 +62,12 @@ function Result(){
                                 <div className='container-content'>
                                     <div className='content7'>
                                         <div className="main-title">RESULTS</div>
+                                        
                                         <p className="sub-title">The total amount of CO2 you emitted into the environment today is:</p>
-                                        <h1 className='main-title'>23</h1>
+                                        
+                                        <h1 className='main-title'>{(totale/20).toFixed(1)}</h1>
                                         <p className="sub-title">If everyone lived like you, we would need:</p>
-                                        <h1 className='main-title'>5.6 Earths</h1>
+                                        <h1 className='main-title'>{(totale/20/20).toFixed(1)} Earths</h1>
                                         <div className='globe-container'>
                                             <div className='globe'>
                                                 <img src={globe}/>

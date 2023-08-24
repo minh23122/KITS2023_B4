@@ -96,7 +96,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
                                         .requestMatchers("/api/article/**").permitAll()
 //                                .requestMatchers("/swagger-ui/**").permitAll()
 //                                .requestMatchers("/user/admin/**").hasRole("ADMIN")
-                                        .requestMatchers("/api/af/**").hasAuthority("USER")
+                                        .requestMatchers("/api/af/**").hasRole("USER")
                                         .requestMatchers("/api/regularactivity/**").hasRole("USER")
                                         .requestMatchers("/api/footprint/**").permitAll()
                                         .requestMatchers("/api/regularactivity/**").hasRole("USER")
