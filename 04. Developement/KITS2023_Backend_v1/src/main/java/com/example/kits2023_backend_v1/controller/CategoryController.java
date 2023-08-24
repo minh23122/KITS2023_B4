@@ -32,4 +32,8 @@ public class CategoryController {
         updateCategory.setName(category.getName());
         return categoryRepository.save(updateCategory);
     }
+    @GetMapping("/count")
+    public long countAllCategories(){
+        return categoryRepository.count();
+    }
 }
