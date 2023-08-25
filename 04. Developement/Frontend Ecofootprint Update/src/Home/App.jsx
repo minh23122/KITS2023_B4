@@ -82,6 +82,7 @@ function App() {
     setIsPopupOpenLogin(!isPopupOpenLogin);
     setIsPopupOpenRegister(false);
   };
+
   const handleRegister = async (event) => {
     event.preventDefault();
     try {
@@ -97,9 +98,14 @@ function App() {
         },
       });
       console.log("Res", response);
+      alert("Register sucessfully!!!");
+      setIsPopupOpenLogin(!isPopupOpenLogin);
+    setIsPopupOpenRegister(!isPopupOpenRegister);
     } catch (e) {
-      alert("Register unsucessfully!!!");
+      alert("Unsuccessful");
       console.error(e);
+      setIsPopupOpenLogin(!isPopupOpenLogin);
+    setIsPopupOpenRegister(!isPopupOpenRegister);
     }
   };
   return (

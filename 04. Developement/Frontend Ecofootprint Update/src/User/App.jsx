@@ -59,7 +59,7 @@ const App = () => {
         <Layout>
         <div className="Content2">
             <div className="chart-container">
-              <Button style={{position: "fixed", top:"5%", right:"5%"}} onClick={handleClickLogout}>Log out</Button>
+              <Button danger style={{position: "fixed", top:"5%", right:"5%"}} onClick={handleClickLogout}>Log out</Button>
               <ProfilePage/>
             </div>
           </div>

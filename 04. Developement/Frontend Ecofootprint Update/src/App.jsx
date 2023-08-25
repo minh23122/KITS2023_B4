@@ -10,6 +10,7 @@ import Result from './Result/Result';
 import Solution from './Result/Solution';
 import Detail from './Result/detail';
 import Forum from './Result/Forum';
+import Rank from './Result/Rank';
 
 import User from './User/App';
 import Activity from './User/Activity';
@@ -50,6 +51,7 @@ function App() {
         <Route path="/solution" element={<Solution />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/forum" element={<Forum />} />
+        <Route path="/rank" element={<Rank />} />
       </Routes>
     </Router>
   );

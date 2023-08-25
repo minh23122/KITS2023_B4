@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const Dashboard = () => {
   const [countUser, setCountUser]=useState(0);
+  const [countActivity, setCountActivity]=useState(0);
   const token=localStorage.getItem("token");
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -25,6 +26,14 @@ const Dashboard = () => {
       }
     })
     setCountUser(response.data);
+    const getCountActivity=await axios({
+      method: "GET",
+      url:"http://localhost:8080/api/activity/count",
+      headers:{
+        "Content-Type":"application/json"
+      }
+    })
+    setCountActivity(getCountActivity.data);
     console.log("res", response.data);
     }
     catch(error){
@@ -48,13 +57,13 @@ const Dashboard = () => {
         </Col>
         <Col span={8}>
           <Card title="Category Count" bordered style={{backgroundColor:'#adcbf3'}}>
-            <p style={{ fontSize: '24px' }}>{categoryData}</p>
+            <p style={{ fontSize: '24px' }}>{4}</p>
             <p style={{ fontSize: '18px' }}>Total number of Category</p>
           </Card>
         </Col>
         <Col span={8}>
           <Card title="Article Count" bordered style={{backgroundColor:'#fde1c3'}}>
-            <p style={{ fontSize: '24px' }}>{articleData}</p>
+            <p style={{ fontSize: '24px' }}>{countActivity}</p>
             <p style={{ fontSize: '18px' }}>Total number of Article</p>
           </Card>
         </Col>

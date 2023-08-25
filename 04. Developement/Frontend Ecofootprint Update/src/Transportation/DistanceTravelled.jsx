@@ -100,6 +100,14 @@ function DistanceTravelled(){
 
     return(<>
         <div className='container3'>
+            <div class="lines-container">
+                <ul id="liner" class="lines">
+                    <li class="inactive"></li>
+                    <li class="active"></li>
+                    <li class="inactive"></li>
+                    <li class="inactive"></li>
+                </ul>
+            </div>
             <div>
                 <Heading />
             </div>  

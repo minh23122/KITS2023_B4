@@ -110,6 +110,14 @@ function House() {
   return (
     <>
       <div className="container2">
+            <div class="lines-container">
+                <ul id="liner" class="lines">
+                    <li class="inactive"></li>
+                    <li class="inactive"></li>
+                    <li class="active"></li>
+                    <li class="inactive"></li>
+                </ul>
+            </div>
         <div>
           <Heading />
         </div>

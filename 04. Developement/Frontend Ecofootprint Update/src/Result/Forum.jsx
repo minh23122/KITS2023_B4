@@ -20,11 +20,6 @@ function Forum(){
         setActiveLink(index === activeLink ? null : index);
         console.log(activeLink);
     };
-    useEffect(() =>{
-        style={
-            
-        }
-    })
     return(
         <>
             <div className='radial-gradient1'>
@@ -44,6 +39,9 @@ function Forum(){
                                 </div>
                                 <div style={{ marginRight: '20px' }} className="cta cta-hvr ">
                                     <Link style={{ padding: '10px 10px', fontSize: '20px' }} to="/forum">FORUM</Link>
+                                </div>
+                                <div style={{ marginRight: '20px' }} className="cta cta-hvr ctb">
+                                    <Link style={{ padding: '10px 10px', fontSize: '20px' }} to="/rank">Rank</Link>
                                 </div>
                             </div>
                             <Link to='/user'><img className='user-icon1' src={IconUser} /></Link>
@@ -112,6 +110,9 @@ function Forum(){
                                     </div>
                                 </div>
                             </div>
+                            <div className="fixed-button cta cta-hvr">
+                                <Link to="/food">Re-take the Quiz</Link>
+                            </div> 
                         </div>
                     </div>
                 </div>

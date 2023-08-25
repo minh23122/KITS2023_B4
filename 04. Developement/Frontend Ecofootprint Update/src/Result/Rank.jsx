@@ -1,38 +1,38 @@
-import './Detail.css';
+import './Rank.css';
 import React from 'react';
 import stars from './assets/bg-stars.png';
 import planets from './assets/bg-planets.png';
 import Logo from './assets/logo.png'
 import IconUser from './assets/userIcon.png'
-import Cacbon from './assets/carbonEmissionsImage.png'
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Link } from 'react-router-dom';
-ChartJS.register(ArcElement, Tooltip, Legend);
-const Detail = () =>{
-    const data = {
-        labels: ['Food', 'House', 'Car', 'Trash'],
-        datasets: [
-            {
-                label: 'CO2',
-                data: [12, 19, 3, 2],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.9)',
-                    'rgba(54, 162, 235, 0.9)',
-                    'rgba(255, 206, 86, 0.9)',
-                    'rgba(153, 102, 255, 0.9)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(153, 102, 255, 1)',
-                ],
-                borderWidth: 1,
-            },
-        ],
-    };
+function getRankSuffix(rank) {
+    if (rank === 1) return "st";
+    if (rank === 2) return "nd";
+    if (rank === 3) return "rd";
+    return "th";
+}
+function Rank(){
+    // Giả sử bạn có một danh sách các người dùng và điểm số của họ
+    const users = [
+        { name: 'Phạm Duy Hoàng', score: 95 },
+        { name: 'Phạm Đức Minh', score: 85 },
+        { name: 'Vũ Đình Tuấn Anh', score: 78 },
+        { name: 'Nguyễn Văn Linh', score: 86 },
+        { name: 'Nguyễn Văn Linh', score: 86 },
+        { name: 'Nguyễn Văn Linh', score: 86 },
+        { name: 'Nguyễn Văn Linh', score: 86 },
+        { name: 'Nguyễn Văn Linh', score: 86 },
+        { name: 'Nguyễn Văn Linh', score: 86 },
+        { name: 'Nguyễn Văn Linh', score: 86 },
+        // ...Thêm các người dùng khác
+    ];
 
+
+
+    const myRank = { name: 'Your Name', score: 79 };
+    users.push(myRank);
+    users.sort((a, b) => a.score - b.score);
+    const myRankPosition = users.findIndex(user => user === myRank) + 1;
     return(
         <>
             <div className='radial-gradient'>
@@ -44,7 +44,7 @@ const Detail = () =>{
                                 <div style={{ marginRight: '20px' }} className="cta cta-hvr ctb">
                                     <Link style={{ padding: '10px 10px', fontSize: '20px' }} to="/result">SUMMARY</Link>
                                 </div>
-                                <div style={{ marginRight: '20px' }} className="cta cta-hvr">
+                                <div style={{ marginRight: '20px' }} className="cta cta-hvr ctb">
                                     <Link style={{ padding: '10px 10px', fontSize: '20px' }} to="/detail">detailed statistics</Link>
                                 </div>
                                 <div style={{ marginRight: '20px' }} className="cta cta-hvr ctb">
@@ -53,7 +53,7 @@ const Detail = () =>{
                                 <div style={{ marginRight: '20px' }} className="cta cta-hvr ctb">
                                     <Link style={{ padding: '10px 10px', fontSize: '20px' }} to="/forum">FORUM</Link>
                                 </div>
-                                <div style={{ marginRight: '20px' }} className="cta cta-hvr ctb">
+                                <div style={{ marginRight: '20px' }} className="cta cta-hvr">
                                     <Link style={{ padding: '10px 10px', fontSize: '20px' }} to="/rank">Rank</Link>
                                 </div>
                             </div>
@@ -69,35 +69,30 @@ const Detail = () =>{
                             <svg _ngcontent-ngb-c46="" aria-hidden="true" height="173.05" viewBox="0 0 195 173.05" width="195" className="comet-05 comet-instance"><use _ngcontent-ngb-c46="" xlinkHref="#comet"></use></svg>
                             <svg _ngcontent-ngb-c46="" aria-hidden="true" height="173.05" viewBox="0 0 195 173.05" width="195" className="comet-06 comet-instance"><use _ngcontent-ngb-c46="" xlinkHref="#comet"></use></svg>
                         </div>
-                        <div className='container8'>
-                            <div className='content8'>
-                                <h1 className='main-title1'> By Consumption Category</h1>
-                                <div className='detail'>
-                                    <div className='doughnut'>
-                                        <Doughnut data={data} options={{
-                                            plugins: {
-                                                legend: {
-                                                    labels: {
-                                                        color: '#fff',
-                                                    },
-                                                },
-                                            },
-                                        }} />
-                                    </div>
-                                    <div className='detail-value'>
-                                        <img src={Cacbon} />
-                                        <div className='detail-h1'>
-                                            {data.labels.map((label, index) => (
-                                                <h1 key={index}>{label}: {data.datasets[0].data[index]}</h1>
-                                            ))}
+                        <div className='container9'>
+                            <div className='rank-table'>
+                                <div className="rank-title">Ranking</div>
+                                {users.slice(0, 10).map((user, index) => (
+                                    <div key={index} className={`rank-row rank-${index + 1}`}>
+                                        <div className="rank">
+                                            {index + 1}
+                                            <sup>{getRankSuffix(index + 1)}</sup>
                                         </div>
+                                        <div className="name center">{user.name}</div>
+                                        <div className="score">{user.score} CO2</div>
                                     </div>
+                                ))}
+                                <div className="title-myrank">My Rank</div>
+                                <div className={`myrank-row rank-${myRankPosition}`}>
+                                    <div className="rank">
+                                        {myRankPosition}
+                                        <sup>{getRankSuffix(myRankPosition)}</sup>
+                                    </div>
+                                    <div className="name center">{myRank.name}</div>
+                                    <div className="score">{myRank.score} CO2</div>
                                 </div>
-                                <h1 className='value-co2'>
-                                    Your Carbon Footprint:{" "}
-                                    {data.datasets[0].data.reduce((total, value) => total + value, 0) / data.datasets[0].data.length}
-                                </h1>
                             </div>
+                            
                             <div className="fixed-button cta cta-hvr">
                                 <Link to="/food">Re-take the Quiz</Link>
                             </div> 
@@ -107,5 +102,5 @@ const Detail = () =>{
             </div>
         </>
     )
-} 
-export default Detail;
+}
+export default Rank;

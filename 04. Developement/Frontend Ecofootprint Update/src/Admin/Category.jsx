@@ -15,9 +15,24 @@ const { Sider, Header } = Layout;
 const { Search } = Input;
 import logo from '../Home/assets/logo.png';
 
+import axios from 'axios';
 const App = () => {
  const [currentTime, setCurrentTime] = useState(moment().format('YYYY-MM-DD HH:mm:ss'));
+  const token=localStorage.getItem("token");
+  const [listCate, setListCate]=useState([]);
 
+  const getListCate = async () => {
+    const response = await axios({
+      method: "GET",
+      url: "http://localhost:8080/api/category/all",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+    });
+    setListCate(response.data);
+  };
+  getListCate();
   // Sử dụng useEffect để cập nhật thời gian mỗi giây
   useEffect(() => {
     const interval = setInterval(() => {
@@ -35,7 +50,7 @@ const App = () => {
   const columns = [
     {
       title: 'Category',
-      dataIndex: 'category',
+      dataIndex: 'name',
     },
     {
       title: 'Actions',
@@ -156,7 +171,7 @@ const App = () => {
             <Search placeholder="Search" style={{ width: 200 , marginTop:'20px', marginBottom:'10px' }} />
             <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={listCate}
             />
 
             <Modal

@@ -14,10 +14,21 @@ import { Layout, Menu, Image, theme, Table, Button, Modal, Form,Input, Space } f
 const { Sider, Header } = Layout;
 const { Search } = Input;
 import logo from '../Home/assets/logo.png';
-
+import axios from 'axios';
 const App = () => {
+  const [listActivity, setListActivity]=useState([]);
   const [currentTime, setCurrentTime] = useState(moment().format('YYYY-MM-DD HH:mm:ss'));
- 
+  const getListUser = async () => {
+    const response = await axios({
+      method: "GET",
+      url: "http://localhost:8080/api/activity/all",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    setListActivity(response.data);
+  };
+  getListUser();
    // Sử dụng useEffect để cập nhật thời gian mỗi giây
    useEffect(() => {
      const interval = setInterval(() => {
@@ -35,15 +46,21 @@ const App = () => {
   const columns = [
     {
       title: 'Activity',
-      dataIndex: 'activity',
+      dataIndex: 'name',
     },
     {
-        title: 'Category',
-        dataIndex: 'category',
+        title: 'Emission',
+        dataIndex: 'emission',
       },
       {
-        title: 'CO2e',
-        dataIndex: 'CO2e',
+        title: 'Unit',
+        dataIndex: 'unit',
+      },
+      {
+        title: "Category",
+        dataIndex: "category",
+        key: "category",
+        render: (category)=>category.name,
       },
     {
       title: 'Actions',
@@ -51,9 +68,6 @@ const App = () => {
         <Space>
           <Button type="primary" onClick={() => showEditModal(record)}>
             Edit
-          </Button>
-          <Button type="primary" onClick={() => handleDelete(record)}>
-            Delete
           </Button>
         </Space>
       ),
@@ -108,7 +122,6 @@ const App = () => {
     const {
         token: { colorBgContainer },
       } = theme.useToken();
-
   const iconList = [
     { icon: DashboardOutlined, label: 'Dashboard', path: '/admin' },
     { icon: IdcardOutlined, label: 'Account', path: '/admin/account' },
@@ -116,7 +129,6 @@ const App = () => {
     { icon: HeartOutlined, label: 'Activity', path: '/admin/activity' },
     { icon: PieChartOutlined, label: 'Analysis', path: '/admin/analysis' },
     { icon: FileWordOutlined, label: 'Article', path: '/admin/article' },
-    { icon: LogoutOutlined, label: 'Logout', path: '/admin/logout' },
     ];
 
   return (
@@ -164,7 +176,7 @@ const App = () => {
             <Search placeholder="Search" style={{ width: 200 , marginTop:'20px', marginBottom:'10px' }} />
             <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={listActivity}
             />
 
             <Modal

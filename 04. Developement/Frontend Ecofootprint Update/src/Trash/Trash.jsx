@@ -31,7 +31,6 @@ function Trash(){
       url: `http://localhost:8080/api/footprint/updateEmission/${footprintId}`,
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       }
     });
@@ -110,6 +109,15 @@ function Trash(){
     return(
         <>
             <div className='container4'>
+            <div class="lines-container">
+                <ul id="liner" class="lines">
+                    <li class="inactive"></li>
+                    <li class="inactive"></li>
+                    <li class="inactive"></li>
+                    <li class="active"></li>
+
+                </ul>
+            </div>
                 <div>
                     <Heading />
                 </div> 

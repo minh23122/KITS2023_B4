@@ -1,6 +1,10 @@
 package com.example.kits2023_backend_v1.controller;
 
+import com.example.kits2023_backend_v1.model.Activity;
+import com.example.kits2023_backend_v1.model.Category;
 import com.example.kits2023_backend_v1.model.User;
+import com.example.kits2023_backend_v1.repository.ActivityRepository;
+import com.example.kits2023_backend_v1.repository.CategoryRepository;
 import com.example.kits2023_backend_v1.repository.UserRepository;
 import com.example.kits2023_backend_v1.response.GenericApiResponse;
 import com.example.kits2023_backend_v1.service.UserSerVice;
@@ -20,6 +24,10 @@ import java.util.Optional;
 public class AdminController {
     @Autowired
     UserSerVice userSerVice;
+    @Autowired
+    CategoryRepository categoryRepository;
+    @Autowired
+    ActivityRepository activityRepository;
     @GetMapping("/users")
     public ResponseEntity<List<User>> findAllUser(){
         List<User> userList = userSerVice.getAllUser();
@@ -59,7 +67,23 @@ public class AdminController {
     public ResponseEntity<String> removeRole(@PathVariable int id,@RequestParam String role){
         return userSerVice.removeRoleFromUser(id,role);
     }
-
-
-
+    @PostMapping("/category")
+    public Category insertCategory(@RequestBody Category category){
+        return categoryRepository.save(category);
+    }
+    //    @DeleteMapping("{id}")
+//    public void deleteCategory(@PathVariable int id){
+//        categoryRepository.deleteById(id);
+//    }
+    @PostMapping("/activity/insert")
+    public Activity insertActivity(@RequestBody Activity activity){
+        if(activityRepository.existsById(activity.getId())) return null;
+        return activityRepository.save(activity);
+    }
+    @PutMapping("/categoty/{id}")
+    public Category updateCategory(@PathVariable int id, @RequestBody Category category){
+        Category updateCategory=categoryRepository.findById(id).get();
+        updateCategory.setName(category.getName());
+        return categoryRepository.save(updateCategory);
+    }
 }

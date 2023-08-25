@@ -29,7 +29,6 @@ const App = () => {
     { icon: BarChartOutlined, label: 'My Chart', path: '/user/chart' },
     { icon: SettingOutlined, label: 'Setting', path: '/user/setting' },
     { icon: FileWordOutlined, label: 'Article', path: '/user/article' },
-    { icon: LogoutOutlined, label: 'Logout', path: '/user/logout' },
   ];
 
 

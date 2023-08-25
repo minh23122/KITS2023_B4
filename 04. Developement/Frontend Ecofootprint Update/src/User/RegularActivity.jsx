@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Button, Form, Input, Popconfirm, Select, Table } from 'antd';
-
+import axios from 'axios';
 const { Option } = Select;
 
 const EditableContext = React.createContext(null);
@@ -90,20 +90,22 @@ const EditableCell = ({
 };
 
 const App = () => {
-  const [dataSource, setDataSource] = useState([
-    {
-      key: '0',
-      name: 'Activity 0',
-      Co2_Emission: '10',
-      Category: 'Food',
-    },
-    {
-      key: '1',
-      name: 'Activity 1',
-      Co2_Emission: '32',
-      Category: 'House',
-    },
-  ]);
+  const [dataSource, setDataSource]=useState([]);
+  const token=localStorage.getItem("token");
+  const userId=localStorage.getItem("userId");
+  const [listRA, setListRA]=useState([]);
+  const getListRA = async () => {
+    const response = await axios({
+      method: "GET",
+      url: "http://localhost:8080/api/regularactivity/all",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+    });
+    setListRA(response.data);
+  };
+  getListRA();
   const [count, setCount] = useState(2);
   const [selectedItem, setSelectedItem] = useState('');
 
@@ -146,19 +148,15 @@ const App = () => {
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'Name',
+      title: 'activity',
+      dataIndex: 'id',
       width: '30%',
       editable: true,
-      render: (_, record) => record.name,
+      render: (record) => record.activityId,
     },
     {
-      title: 'Co2_Emission',
-      dataIndex: 'Co2_Emission',
-    },
-    {
-      title: 'Category',
-      dataIndex: 'Category',
+      title: 'volumn',
+      dataIndex: 'volumn',
     },
     {
       title: 'Operation',
@@ -200,7 +198,7 @@ const App = () => {
         components={components}
         rowClassName={() => 'editable-row'}
         bordered
-        dataSource={dataSource}
+        dataSource={listRA}
         columns={columns}
       />
     </div>

@@ -18,12 +18,8 @@ public class ActivityController {
     public List<Activity> getAll(){
         return activityRepository.findAll();
     }
-    @PostMapping
-    public Activity insertActivity(@RequestBody Activity activity){
-        if(activityRepository.existsById(activity.getId())) return null;
-        return activityRepository.save(activity);
-    }
-    @PutMapping("/update/{id}")
+
+    @PutMapping("admin/update/{id}")
     public Activity updateActivity(@PathVariable int id,@RequestBody Activity activity){
         Optional<Activity> u=activityRepository.findById(id);
         if(u.isPresent()){
