@@ -1,7 +1,0 @@
-package b4.kits2023_backend_b4.repository;
-
-import b4.kits2023_backend_b4.model.Activity;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface ActivityRepository extends JpaRepository<Activity, Integer> {
-}
