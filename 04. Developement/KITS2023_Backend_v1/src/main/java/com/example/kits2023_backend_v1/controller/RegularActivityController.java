@@ -32,7 +32,11 @@ public class RegularActivityController {
         regularActivityRepository.deleteById(id);
     }
     @GetMapping("/user/{userId}")
-    public List<RegularActivity> list(@PathVariable int userId){
+    public List<RegularActivity> listByUser(@PathVariable int userId){
         return regularActivityRepository.findById_UserId(userId);
+    }
+    @GetMapping("/all")
+    public List<RegularActivity> ALlActivity(){
+        return regularActivityRepository.findAll();
     }
 }

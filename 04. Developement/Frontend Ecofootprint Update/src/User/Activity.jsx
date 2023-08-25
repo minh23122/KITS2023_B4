@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RegularActiviti from './RegularActivity';
 import {
@@ -19,7 +19,7 @@ const App = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
+  
   const iconList = [
     { icon: UserOutlined, label: 'My Profile', path: '/user' },
     { icon: RadarChartOutlined, label: 'My Activity', path: '/user/activity' },
@@ -27,9 +27,7 @@ const App = () => {
     { icon: BarChartOutlined, label: 'My Chart', path: '/user/chart' },
     { icon: SettingOutlined, label: 'Setting', path: '/user/setting' },
     { icon: FileWordOutlined, label: 'Article', path: '/user/article' },
-    { icon: LogoutOutlined, label: 'Logout', path: '/user/logout' },
   ];
-
 
 
   return (

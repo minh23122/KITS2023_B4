@@ -1,0 +1,75 @@
+.rank-table {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    width: 700px;
+    margin: 0 auto;
+}
+
+.rank-title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.title-myrank{
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+.center{
+    text-align: center;
+}
+.rank-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+.myrank-row{
+    display: flex;
+    align-items: center;
+    padding: 10px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+.rank {
+    font-size: 18px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.name {
+    flex: 1;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.score {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.rank-1 div {
+    font-size: 24px;
+}
+
+.rank-2 div {
+    font-size: 20px;
+}
+
+.rank-3 div {
+    font-size: 20px;
+}
+.forum-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    width: 1024px;
+}
+.container9{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -30,6 +30,9 @@ function Solution(){
                                 <div style={{ marginRight: '20px' }} className="cta cta-hvr ctb">
                                     <Link style={{ padding: '10px 10px', fontSize: '20px' }} to="/forum">FORUM</Link>
                                 </div>
+                                <div style={{ marginRight: '20px' }} className="cta cta-hvr ctb">
+                                    <Link style={{ padding: '10px 10px', fontSize: '20px' }} to="/rank">Rank</Link>
+                                </div>
                             </div>
                             <Link to='/user'><img className='user-icon1' src={IconUser} /></Link>
                         </div>

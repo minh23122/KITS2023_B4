@@ -16,6 +16,47 @@ body, html {
   display: flex;
   flex-direction: column;
 }
+.lines-container {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  height: 0.5rem;
+  width: 100%;
+}
+.lines {
+  display: flex;
+  flex-grow: 1;
+  margin: 0;
+  padding: 0;
+}
+.lines li {
+  position: relative;
+  display: inline-flex;
+  flex-grow: 1;
+  height: 0.4rem;
+  border-radius: 0.3rem;
+  background-color: hsla(0, 0%, 100%, .5);
+  box-shadow: 1px 1px 8px 0.2px rgba(0, 0, 0, .3);
+  overflow: hidden;
+}
+.lines li.active {
+  background-color: #f99000;
+}
+.lines li.active:before {
+  background-color: #f99000;
+}
+.lines li:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  background-color: #ff9000;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 1s linear;
+}
 p , a, h1 , h2 {
   color: #2c3e50;
   margin: 0;
